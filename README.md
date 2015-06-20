@@ -32,4 +32,11 @@ Import the less file if you are using LESS (If so, thumbs up!)
 	<i class="fa fa-bars"></i>
 </span>
 ```
+**4**.   Iniate basic Moby.js
+```JS
+// Target the menu you would like to be mobile friendly
+$('nav#main-nav').moby({
+	mobyTrigger: $('#moby-button'), // Button that will trigger the Moby menu to open
+});
+```
 
