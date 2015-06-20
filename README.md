@@ -1,5 +1,5 @@
 # moby.js
-Moby.js is a JS Library that assists in creating mobile menus. [View demo and docs](https://www.joshuasanger.ca/dev/moby)
+Moby.js is a JS Library that assists in creating mobile menus. [View demo and docs](http://www.joshuasanger.ca/libraries/moby)
 ## Basic Implementation
 **1**.   Link CSS file in head of document
 ```HTML
