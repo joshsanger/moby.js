@@ -26,5 +26,10 @@ Import the less file if you are using LESS (If so, thumbs up!)
 		<li><a href="#">Link 4</a></li>
 	<ul>
 </nav>
+
+<!-- Do NOT use an anchor tag for the mobile menu button -->
+<span id="#moby-button">
+	<i class="fa fa-bars"></i>
+</span>
 ```
 
