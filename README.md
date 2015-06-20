@@ -5,7 +5,8 @@ Moby.js is a JS Library that assists in creating mobile menus. [View demo and do
 ```HTML
 <link type="text/css" rel="stylesheet" href="./path-to-css/moby.css"/>
 ```
-OR Import the less file if you are using LESS (If so, thumbs up!)
+OR 
+Import the less file if you are using LESS (If so, thumbs up!)
 ```CSS
 @import "./path-to-css/moby.less";
 ```
