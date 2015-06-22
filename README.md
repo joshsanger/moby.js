@@ -34,7 +34,7 @@ Import the less file if you are using LESS (If so, thumbs up!)
 	<i class="fa fa-bars"></i>
 </span>
 ```
-**4**.   Iniate basic Moby.js
+**4**.   Initiate basic Moby.js
 ```JS
 // Target the menu you would like to be mobile friendly
 $('nav#main-nav').moby({
