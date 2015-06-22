@@ -11,7 +11,7 @@ Import the less file if you are using LESS (If so, thumbs up!)
 /* Include in your main less file */
 @import "./path-to-css/moby.less";
 ```
-**2**.   Link to jQuery v1.11.3+ (If not using already) and moby.min.js file
+**2**.   Link to jQuery v1.11.1+ (If not using already) and moby.min.js file
 ```HTML
 <!-- Moby.js requires jQuery version 1.11.1 or higher -->
 <script src="./path-to-js/jquery-1.11.1.min.js"></script>
