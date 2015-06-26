@@ -32,7 +32,7 @@ $('nav#main-nav').moby({
 	insertAfter			: 	'', 
 	insertBefore		: 	'',
 	menuClass		 	: 	'right-side', 
-	mobyTrigger		 	: 	'$("#moby-button")', 
+	mobyTrigger		 	: 	$("#moby-button"), 
 	overlay			 	: 	true, 
 	overlayClass 	 	: 	'dark', 
 	subMenuOpenIcon  	: 	'&lt;span&gt;&amp;#x25BC;&lt;/span&gt;', 
@@ -82,8 +82,8 @@ $('nav#main-nav').moby({
 					</div> <!-- /wrap -->
 					<div class="option">
 						<h2>mobyTrigger</h2>
-						<p>(<span class="green-font">string</span>) You MUST specify which which element will trigger <code class="language-CSS">#moby</code> to open. It is recommended to NOT use an <code class="language-markup">&lt;a&gt;</code> tag for the trigger, but instead use a <code class="language-markup">&lt;span&gt;</code> tag. If not set, <code class="language-markup">#moby-button</code> will be set to the default trigger.</p>		
-						<p class="default">Default: '$("#moby-button")'</p>
+						<p>(<span class="pink-font">element</span>) You MUST specify which which element will trigger <code class="language-CSS">#moby</code> to open. It is recommended to NOT use an <code class="language-markup">&lt;a&gt;</code> tag for the trigger, but instead use a <code class="language-markup">&lt;span&gt;</code> tag. If not set, <code class="language-markup">#moby-button</code> will be set to the default trigger.</p>		
+						<p class="default">Default: $("#moby-button")</p>
 					</div> <!-- /wrap -->
 					<div class="option">
 						<h2>overlay</h2>
