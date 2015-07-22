@@ -146,11 +146,6 @@ jQuery(document).ready(function($){
                 moby.insertAfter = ''; 
             } 
 
-            // if insertBefore is not definded, leave blank
-            if (typeof(moby.insertBefore) == 'undefined') { 
-                moby.insertBefore = ''; 
-            } 
-
             // if overlayClass is not defined, assign dark as the default
             if (typeof(moby.overlayClass) == 'undefined') { 
                 moby.overlayClass = 'dark'; 
@@ -172,7 +167,7 @@ jQuery(document).ready(function($){
             $('body').prepend('<div id="moby"></div>');    
 
             // If user specified insertBefore, then insert into #moby
-            if(moby.insertBefore !== '') {
+            if(moby.insertBefore !== 'undefined') {
                 $('#moby').prepend('<div id="moby-before">' + moby.insertBefore + '</div>');
             }
 
