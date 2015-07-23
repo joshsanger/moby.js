@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
         // The first time the button is clicked, clone the desired menu, assign sub menu open and close icons, and insert content after mobile menu
         if($('#moby-clone').length < 1) {
             $('#' + targetMenu).clone().appendTo('#moby');
-            $('#moby #' + targetMenu).attr('id', 'moby-clone');
+            $('#moby #' + targetMenu).attr('id', 'moby-clone').removeAttr('class');
             $('#moby #moby-clone li').find('ul').parent().find('> a').append("<span class='moby-expand'>" + subMenuOpenIcon + '</span>');
             $('.moby-expand').attr({
                 'data-open': subMenuOpenIcon, 

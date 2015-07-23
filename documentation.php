@@ -46,7 +46,7 @@ $('nav#main-nav').moby({
 					<h1>The Options</h1>
 					<div class="option">
 						<h2>breakpoint</h2>
-						<p>(<span class="dark-red-font">integer</span>) The number that is entered should match the breakpoint of when the targeted menu swicthes to mobile. If <code class="language-CSS">#moby</code> is open when the screen resizes above the set breakpoint, <code class="language-CSS">#moby</code> will close.</p>	
+						<p>(<span class="dark-red-font">integer</span>) The number that is entered should match the breakpoint of when the targeted menu switches to mobile. If <code class="language-CSS">#moby</code> is open when the screen resizes above the set breakpoint, <code class="language-CSS">#moby</code> will close.</p>	
 						<p class="default">Default: 960</p>
 					</div> <!-- /wrap -->
 					<div class="option">
