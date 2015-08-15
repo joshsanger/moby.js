@@ -1,5 +1,11 @@
 @moby-background: #ffffff;
 @moby-color: #9a989a;
+.moby-transform(...) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-ms-transform: @arguments;
+	transform: @arguments;
+}
 #moby-overlay {
 	position: fixed;
 	top: 0;
@@ -35,17 +41,18 @@
 	-ms-transition: all 0.4s;
 	transition: all 0.4s;
 	padding: 20px;
+	right: 0;
 	overflow: auto;
 	&.right-side {
 		position: fixed;
 		z-index: 3000;
 		top: 0;
 		height: 100%;
-		right: -300px;
+		.moby-transform(~"translateX(280px)");
 		width: 280px;
 		border-left: solid 1px rgba(0,0,0,0.08);
 		&.moby-active {
-			right: 0 !important;
+			.moby-transform(~"translateX(0px)");
 		}	
 	}
 	&.fade {
@@ -68,33 +75,35 @@
 		z-index: 3000;
 		top: 0;
 		height: 100%;
-		left: -300px;
+		left: 0px;
 		width: 280px;
+		.moby-transform(~"translateX(-300px)");
 		border-right: solid 1px rgba(0,0,0,0.2);
 		&.moby-active {
-			left: 0 !important;
+			.moby-transform(~"translateX(0px)") !important;
 		}	
 	}
 	&.top-full {
 		position: fixed;
 		z-index: 3000;
-		top: -100%;
+		top: 0;
+		.moby-transform(~"translateY(-100%)");
 		height: 100%;
 		left: 0px;
 		width: 100%;
 		&.moby-active {
-			top: 0 !important;
+			.moby-transform(~"translateY(0)") !important;
 		}	
 	}
 	&.bottom-full {
 		position: fixed;
 		z-index: 3000;
-		bottom: -100%;
+		.moby-transform(~"translateY(100%)");
 		height: 100%;
 		left: 0px;
 		width: 100%;
 		&.moby-active {
-			bottom: 0 !important;
+			.moby-transform(~"translateY(0)") !important;
 		}		
 	}
 	&.grow-out{
@@ -104,19 +113,13 @@
 		height: 100%;
 		left: 0px;
 		width: 100%;
-		-webkit-transform: scale(.7);
-		-moz-transform: scale(.7);
-		-ms-transform: scale(.7);
-		transform: scale(.7);
+		.moby-transform(~"scale(.7)");
 		visibility: hidden;
 		opacity: 0;
 		&.moby-active {
 			opacity: 1 !important;
 			visibility: visible !important;
-			-webkit-transform: scale(1) !important;
-			-moz-transform: scale(1) !important;
-			-ms-transform: scale(1) !important;
-			transform: scale(1) !important;
+			.moby-transform(~"scale(1)") !important;
 		}
 	}
 	&.shrink-in {
@@ -126,19 +129,13 @@
 		height: 100%;
 		left: 0px;
 		width: 100%;
-		-webkit-transform: scale(1.2);
-		-moz-transform: scale(1.2);
-		-ms-transform: scale(1.2);
-		transform: scale(1.2);
+		.moby-transform(~"scale(1.2)");
 		visibility: hidden;
 		opacity: 0;
 		&.moby-active {
 			opacity: 1 !important;
 			visibility: visible !important;
-			-webkit-transform: scale(1) !important;
-			-moz-transform: scale(1) !important;
-			-ms-transform: scale(1) !important;
-			transform: scale(1) !important;
+			.moby-transform(~"scale(1)") !important;
 		}
 	}
 	& ul {
