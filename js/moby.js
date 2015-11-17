@@ -11,6 +11,11 @@ jQuery(document).ready(function($){
     */
 	
 	function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon, insertAfter) {
+
+        // remove the moby-hidden class if it exists
+        if($('#moby.moby-hidden').length > 0) {
+            $('#moby').removeClass('moby-hidden');
+        }
 		
         // .moby-active should be used to initiate the animation in your css file
         $('#moby').addClass('moby-active');
@@ -194,7 +199,8 @@ jQuery(document).ready(function($){
             }
             
             // add class / type of menu to #moby
-            $('#moby').addClass(moby.menuClass);
+            $('#moby').addClass(moby.menuClass + ' moby-hidden');
+            console.log('bums');
 
             // assign the open function to the mobyTrigger
 			moby.mobyTrigger.on('click', function(){

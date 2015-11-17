@@ -2,7 +2,11 @@ jQuery(document).ready(function($){
 	
 	function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon, insertAfter) {
 		
-        
+        // remove the moby-hidden class if it exists
+        if($('#moby.moby-hidden').length > 0) {
+            $('#moby').removeClass('moby-hidden');
+        }
+
         // Themes / different menus to be added here
         $('#moby').removeClass('demo').addClass('moby-active');
         $('body').addClass('moby-body-fixed');
@@ -182,7 +186,7 @@ jQuery(document).ready(function($){
             }
             
             // add class / type of menu
-            $('#moby').addClass(moby.menuClass);
+            $('#moby').addClass(moby.menuClass + ' moby-hidden');
 
 
 			moby.mobyTrigger.on('click', function(){
