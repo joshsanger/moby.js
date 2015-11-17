@@ -200,7 +200,6 @@ jQuery(document).ready(function($){
             
             // add class / type of menu to #moby
             $('#moby').addClass(moby.menuClass + ' moby-hidden');
-            console.log('bums');
 
             // assign the open function to the mobyTrigger
 			moby.mobyTrigger.on('click', function(){
