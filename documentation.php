@@ -1,6 +1,6 @@
 <?php
 	$active = 'documentation';
-	$title = 'Documentation';
+	$title = 'Documentation | ';
 	require_once('./inc/header.php');
 ?>
 	<section id="top-section">
@@ -25,7 +25,7 @@
 <code class="language-javascript">
 // Moby.js will duplicate the #main-nav menu
 $('nav#main-nav').moby({
-	breakpoint			: 	960, 
+	breakpoint			: 	1024, 
 	closeButton		 	: 	true, 
 	closeButtonContent 	: 	'&lt;span&gt;X&lt;/span&gt; Close Menu',
 	enableEscape		: 	true, 

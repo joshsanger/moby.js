@@ -1,6 +1,6 @@
 <?php
 	$active = 'examples';
-	$title = 'Examples';
+	$title = 'Examples | ';
 	require_once('./inc/header.php');
 ?>
 	<section id="top-section">

@@ -138,7 +138,7 @@ jQuery(document).ready(function($){
 
             // if breakpoint is not defined assign 980 as default
             if (typeof(moby.breakpoint) == 'undefined') { 
-                moby.breakpoint = 960; 
+                moby.breakpoint = 1024; 
             }
 
             // if enableEscape is not defines, assign TRUE as default
