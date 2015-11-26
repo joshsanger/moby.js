@@ -1,5 +1,8 @@
 @charset "UTF-8";
 #moby-overlay {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   position: fixed;
   -webkit-transform: translate3D(0, 0, 0);
   -moz-transform: translate3D(0, 0, 0);
@@ -32,6 +35,9 @@
   overflow: hidden !important;
 }
 #moby {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   background: #ffffff;
   -webkit-transition: all 0.4s, visibility 0s;
   -moz-transition: all 0.4s, visibility 0s;
@@ -41,6 +47,11 @@
   right: 0;
   overflow: auto;
 }
+#moby * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 #moby.moby-hidden {
   visibility: hidden;
 }
@@ -49,6 +60,9 @@
   z-index: 3000;
   top: 0;
   height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: translateX(300px);
   -moz-transform: translateX(300px);
   -ms-transform: translateX(300px);
@@ -56,6 +70,9 @@
   width: 280px;
 }
 #moby.right-side.moby-active {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: translateX(0px);
   -moz-transform: translateX(0px);
   -ms-transform: translateX(0px);
@@ -83,12 +100,18 @@
   height: 100%;
   left: 0px;
   width: 280px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: translateX(-300px);
   -moz-transform: translateX(-300px);
   -ms-transform: translateX(-300px);
   transform: translateX(-300px);
 }
 #moby.left-side.moby-active {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
   -webkit-transform: translateX(0px) !important;
   -moz-transform: translateX(0px) !important;
   -ms-transform: translateX(0px) !important;
@@ -99,6 +122,9 @@
   position: fixed;
   z-index: 3000;
   top: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: translateY(-100%);
   -moz-transform: translateY(-100%);
   -ms-transform: translateY(-100%);
@@ -108,6 +134,9 @@
   width: 100%;
 }
 #moby.top-full.moby-active {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
   -webkit-transform: translateY(0) !important;
   -moz-transform: translateY(0) !important;
   -ms-transform: translateY(0) !important;
@@ -116,6 +145,9 @@
 #moby.bottom-full {
   position: fixed;
   z-index: 3000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: translateY(100%);
   -moz-transform: translateY(100%);
   -ms-transform: translateY(100%);
@@ -125,6 +157,9 @@
   width: 100%;
 }
 #moby.bottom-full.moby-active {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
   -webkit-transform: translateY(0) !important;
   -moz-transform: translateY(0) !important;
   -ms-transform: translateY(0) !important;
@@ -137,6 +172,9 @@
   height: 100%;
   left: 0px;
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: scale(.7);
   -moz-transform: scale(.7);
   -ms-transform: scale(.7);
@@ -147,6 +185,9 @@
 #moby.grow-out.moby-active {
   opacity: 1 !important;
   visibility: visible !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
   -webkit-transform: scale(1) !important;
   -moz-transform: scale(1) !important;
   -ms-transform: scale(1) !important;
@@ -159,6 +200,9 @@
   height: 100%;
   left: 0px;
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);
   -ms-transform: scale(1.2);
@@ -169,6 +213,9 @@
 #moby.shrink-in.moby-active {
   opacity: 1 !important;
   visibility: visible !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
   -webkit-transform: scale(1) !important;
   -moz-transform: scale(1) !important;
   -ms-transform: scale(1) !important;

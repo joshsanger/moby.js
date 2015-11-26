@@ -68,7 +68,7 @@
 &lt;/nav&gt;
 
 &lt;!-- Do NOT use an anchor tag for the mobile menu button --&gt;
-&lt;span id="#moby-button"&gt;
+&lt;span id="moby-button"&gt;
 	&lt;i class="fa fa-bars"&gt;&lt;/i&gt;
 &lt;/span&gt;</code>
 </pre>
