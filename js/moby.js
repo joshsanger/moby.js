@@ -1,3 +1,7 @@
+/* 
+ * MOBY.JS VERSION 1.3
+ */
+
 jQuery(document).ready(function($){
 
     /* 

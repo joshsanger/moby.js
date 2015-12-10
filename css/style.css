@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 
+ * MOBY.LESS VERSION 1.3
+ */
 #moby-overlay {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -265,7 +268,7 @@
   left: 0;
   position: absolute;
   top: 50%;
-  -webkit-tranform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
