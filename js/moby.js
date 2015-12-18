@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
         if($('#moby-clone').length < 1) {
             $('#' + targetMenu).clone().appendTo('#moby');
             $('#moby #' + targetMenu).attr('id', 'moby-clone').removeAttr('class');
-            $('#moby #moby-clone li').find('ul').parent().find('> a').append("<span class='moby-expand'>" + subMenuOpenIcon + '</span>');
+            $('#moby li').find('ul').parent().find('> a').append("<span class='moby-expand'>" + subMenuOpenIcon + '</span>');
             $('.moby-expand').attr({
                 'data-open': subMenuOpenIcon, 
                 'data-close': subMenuCloseIcon
