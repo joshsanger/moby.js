@@ -1,5 +1,5 @@
 /* 
- * MOBY.JS VERSION 1.3
+ * MOBY.JS VERSION 1.4
  */
 
 jQuery(document).ready(function($){
@@ -40,8 +40,10 @@ jQuery(document).ready(function($){
                 'data-open': subMenuOpenIcon, 
                 'data-close': subMenuCloseIcon
             });
-            if(insertAfter !== '' && $('#moby-after').length < 1) {
-                $('#moby').append('<div id="moby-after">' + insertAfter + '</div>');
+
+            // If #moby-after exists, move it to the bottom of #moby
+            if($('#moby-after').length > 0) {
+                $('#moby-after').appendTo('#moby');
             }            
         }
 	} // end openMoby()
@@ -184,6 +186,11 @@ jQuery(document).ready(function($){
             if(moby.insertBefore !== '') {
                 $('#moby').prepend('<div id="moby-before">' + moby.insertBefore + '</div>');
             }
+
+            // If user specified insertafter, then insert into #moby
+            if(moby.insertAfter !== '') {
+                $('#moby').append('<div id="moby-after">' + moby.insertAfter + '</div>');
+            }     
 
             // If the closeButton is desired (or left undefined) add the close button to #moby
             if(moby.closeButton == true) {
