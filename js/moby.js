@@ -83,6 +83,7 @@ jQuery(document).ready(function($){
 
     function mobyExpandSubMenu(e) {
         e.preventDefault();
+        e.stopPropagation();
         var mobyOpenIcon = $(this).data('open');
         var mobyCloseIcon = $(this).data('close');
 
@@ -104,7 +105,7 @@ jQuery(document).ready(function($){
     function mobyPreventDummyLinks(e) {
         if($(this).attr('href') == "#") {
             e.preventDefault();
-            if($(this).find('> .moby-expand')) {
+            if($(this).find('> .moby-expand').length > 0) {
                 $(this).find(' > .moby-expand').trigger('click');
             }
         }
