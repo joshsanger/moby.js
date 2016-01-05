@@ -1,5 +1,5 @@
 /* 
- * MOBY.JS VERSION 1.4
+ * MOBY.JS VERSION 1.5
  */
 
 jQuery(document).ready(function($){
@@ -97,6 +97,18 @@ jQuery(document).ready(function($){
         }
     } // end mobyExpandSubMenu()
 	
+
+    /*
+    Function that prevents the default link behavior on links with no URL, then triggers the .moby-expand
+    */
+    function mobyPreventDummyLinks(e) {
+        if($(this).attr('href') == "#") {
+            e.preventDefault();
+            if($(this).find('> .moby-expand')) {
+                $(this).find(' > .moby-expand').trigger('click');
+            }
+        }
+    }
 
     // Main moby function
 
@@ -224,6 +236,9 @@ jQuery(document).ready(function($){
 
             // Assign mobyExpandSubMenu to sub menu icons
             $('#moby').on('click', '.moby-expand', mobyExpandSubMenu);
+
+            // Assign mobyPreventDummyLinks to links 
+            $('#moby').on('click', 'a', mobyPreventDummyLinks);
 		}
 	}); // end fn.extend
 

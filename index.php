@@ -7,7 +7,7 @@
 		<div class="container">
 			<h2>Wave goodbye to annoying Mobile Menus</h2>
 			<p>Moby.js is a JS Library that assists in creating mobile menus</p>
-			<a href="<?php echo BASE_URL;?>/dist/moby1.4.zip">Download 1.4</a>
+			<a href="<?php echo BASE_URL;?>/dist/moby1.5.zip">Download 1.5</a>
 		</div> <!-- /container -->
 	</section> <!-- / top-section -->
 	<article class="content">

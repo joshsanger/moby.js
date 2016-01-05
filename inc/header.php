@@ -51,7 +51,7 @@
 					</li>
 					<li><a href="<?php echo BASE_URL;?>/examples.php" class="<?php if($active == 'examples'){ echo 'active'; }?>">Examples</a></li>
 					<li><a href="<?php echo BASE_URL;?>/documentation.php" class="<?php if($active == 'documentation'){ echo 'active'; }?>">Documentation</a></li>
-					<li><a href="<?php echo BASE_URL;?>/dist/moby1.4.zip">Download</a></li>
+					<li><a href="<?php echo BASE_URL;?>/dist/moby1.5.zip">Download</a></li>
 				</ul>
 			</nav>
 			<span id="trigger-main-menu" class="trigger-menu main-trigger" data-target="right-side">
