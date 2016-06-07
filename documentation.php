@@ -7,7 +7,7 @@
 		<div class="container">
 			<h2>Moby.js Documentation</h2>
 			<p>The ins and outs of Moby.js</p>
-			<a href="<?php echo BASE_URL;?>/dist/moby1.5.zip">Download 1.5</a>
+			<a href="<?php echo BASE_URL;?>/dist/moby1.6.zip">Download 1.6</a>
 		</div> <!-- /container -->
 	</section> <!-- / top-section -->
 	<article class="content">
@@ -41,7 +41,7 @@ $('nav#main-nav').moby({
 </pre>
 				</div> <!-- /container -->
 			</section>
-			<section>
+			<section class="separator">
 				<div class="container">
 					<h1>The Options</h1>
 					<div class="option">
@@ -106,6 +106,33 @@ $('nav#main-nav').moby({
 						<p>(<span class="green-font">string</span>) The icon displaying when the sub menus are showing (to prompt the user to collapse it) can be replaced with text, markup, font-awesome, etc.</p>
 						<p class="default">Default: '&lt;span&gt;&amp;#x25B2;&lt;/span&gt;'</p>
 					</div> <!-- /wrap -->
+					
+					
+				</div> <!-- /container -->
+			</section>
+
+			<section>
+				<div class="container">
+					<h1>The Methods</h1>
+					<p>These methods are only to be used <em>after</em> you have already initiated moby.</p>
+					<div class="option">
+						<h2>.mobyClose()</h2>
+						<p>Using mobyClose() will manually close the moby menu. Simply target the same menu as you did when you initated moby.</p>
+<pre>
+<code class="language-javascript">
+// Manually closes Moby
+$('nav#main-nav').mobyClose();</code>
+</pre>
+					</div> <!-- /option -->
+					<div class="option">
+						<h2>.mobyOpen()</h2>
+						<p>Using mobyOpen() will manually open the moby menu. Simply target the same menu as you did when you initated moby.</p>
+<pre>
+<code class="language-javascript">
+// Manually opens Moby
+$('nav#main-nav').mobyOpen();</code>
+</pre>
+					</div> <!-- /option -->
 					
 					
 				</div> <!-- /container -->
