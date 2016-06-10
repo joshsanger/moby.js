@@ -1,19 +1,39 @@
-/* 
- * MOBY.JS VERSION 1.6
+/**
+ * T A B L E   O F   C O N T E N T S
+ *
+ * @author      Josh Sanger
+ * @version     1.6
+ *
+ * 01. GLOBAL VARIABLES
+ * 02. OPEN MOBY
+ * 03. CLOSE MOBY
+ * 04. BREAKPOINT RESIZE
+ * 05. MOBY EXPAND SUB MENU
+ * 06. MOBY PREVENT DUMMY LINKS
+ * 07. MOBY SET UP
+ *
  */
 
 
-/*
-Function that opens Moby. This function runs when the mobyTrigger is clicked
-Parameters:
-    1. targetMenu - The menu that will be cloned for mobile
-    2. overlay - Boolean to show overlay or not
-    3. subMenuOpenIcon - The icon that will prompt the user to expand hidden menu items
-    4. subMenuCloseIcon - The icon that will prompt the user to close showing menu items
-    5. insertAfter - The conten that will be inserted after the mobile menu
-*/
 
-function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon, insertAfter) {
+/**
+ * 01. GLOBAL VARIABLES
+ * Global Variables that will be used throughout the Library
+ *
+ */
+var mobyUsersSettings = {};
+
+
+/**
+ * 02. OPEN MOBY
+ * Function that runs when the Moby trigger is clicked, or the mobyOpen method is called
+ *
+ * @param       targetMenu          string      The Id of the menu that will be clones for mobile
+ * @param       overlay             boolean     Set to true if the overlay is to be shown
+ * @param       SubMenuOpenIcon     string      The markup for the icon to open sub-menus
+ * @param       SubMenuCloseIcon    string      The markup for the icon to close sub-menus
+ */
+function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon) {
 
     // remove the moby-hidden class if it exists
     if($('#moby.moby-hidden').length > 0) {
@@ -45,15 +65,15 @@ function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon, insert
             $('#moby-after').appendTo('#moby');
         }
     }
-} // end openMoby()
+}
 
 
-/*
-Function that closes Moby. This function runs when the close button, overlay, or the escape key is pressed
-Parameters:
-    1. overlay - Boolean to show overlay or not
-*/
-
+/**
+ * 03. CLOSE MOBY
+ * Closes Moby when the close button, overlay, escape key, or the mobyClose method is called
+ *
+ * @param       overlay             boolean     Set to true if the overlay is to be shown
+ */
 function closemoby(overlay) {
     if($('#moby').hasClass('moby-active')) {
         if(overlay == true) {
@@ -62,24 +82,28 @@ function closemoby(overlay) {
         $('#moby').removeClass('moby-active');
         $('body').removeClass('moby-body-fixed');
     }
-} // end closemoby()
+}
 
 
-//Function that closes Moby if the user increases the screen size past the mobile menu breakpoint
-
+/**
+ * 04. BREAKPOINT RESIZE
+ * Closes Moby if the user increases the screen size past the mobile menu breakpoint
+ *
+ * @see     closemoby()
+ */
 function breakpointResize(breakpoint, overlay) {
     var w = window.outerWidth;
     if (w > breakpoint && $('#moby').hasClass('moby-active')) {
         closemoby(overlay);
     }
-} // end breakpointResize()
+}
 
-
-/*
-Function that expands hidden sub menu items. This function takes advantage of jQuery's slideUp and slideDown functions,
-and swaps the icons depending on the open state of the sub menu.
-*/
-
+/**
+ * 05. MOBY EXPAND SUB MENU
+ * Expands hidden sub menu items. This function takes advantage of jQuery's slideUp and slideDown functions,
+ * and swaps the icons depending on the open state of the sub menu.
+ *
+ */
 function mobyExpandSubMenu(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -95,12 +119,14 @@ function mobyExpandSubMenu(e) {
         $(this).removeClass('moby-submenu-open');
         $(this).parent('a').parent('li').find('> ul').slideUp(200);
     }
-} // end mobyExpandSubMenu()
+}
 
 
-/*
-Function that prevents the default link behavior on links with no URL, then triggers the .moby-expand
-*/
+/**
+ * 06. MOBY PREVENT DUMMY LINKS
+ * Prevents the default link behavior on links with no URL, then triggers the .moby-expand
+ *
+ */
 function mobyPreventDummyLinks(e) {
     if($(this).attr('href') == "#") {
         e.preventDefault();
@@ -110,8 +136,15 @@ function mobyPreventDummyLinks(e) {
     }
 }
 
-// declare global object to hold user / default options
-var mobyUsersSettings = {};
+
+
+/**
+ * 07. MOBY SET UP
+ * Sets up the moby menu, settings, and methods
+ *
+ * @see     closemoby
+ * @see     openmoby
+ */
 
 $(document).ready(function(){
 
@@ -259,6 +292,6 @@ $(document).ready(function(){
             mobyUsersSettings = moby;
             mobyUsersSettings.userMenu = targetMenu;
         }
-    }); // end fn.extend
-}); // end documen.ready()
+    });
+});
 
