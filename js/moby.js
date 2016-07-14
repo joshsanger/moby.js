@@ -2,7 +2,7 @@
  * T A B L E   O F   C O N T E N T S
  *
  * @author      Josh Sanger
- * @version     1.6
+ * @version     1.7
  *
  * 01. GLOBAL VARIABLES
  * 02. OPEN MOBY
@@ -68,6 +68,8 @@ function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon) {
 }
 
 
+
+
 /**
  * 03. CLOSE MOBY
  * Closes Moby when the close button, overlay, escape key, or the mobyClose method is called
@@ -103,21 +105,36 @@ function breakpointResize(breakpoint, overlay) {
  * Expands hidden sub menu items. This function takes advantage of jQuery's slideUp and slideDown functions,
  * and swaps the icons depending on the open state of the sub menu.
  *
+ * @param       elem            element     The element that was clicked
+ * @param       multiLevel      boolean     Set to true if the menu has multilevel
+ *
  */
-function mobyExpandSubMenu(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var mobyOpenIcon = $(this).data('open');
-    var mobyCloseIcon = $(this).data('close');
+function mobyExpandSubMenu(elem, multiLevel) {
 
-    if(!$(this).hasClass('moby-submenu-open')) {
-        $(this).html(mobyCloseIcon);
-        $(this).addClass('moby-submenu-open');
-        $(this).parent('a').parent('li').find('> ul').slideDown(200);
+    var mobyOpenIcon = elem.data('open');
+    var mobyCloseIcon =elem.data('close');
+
+    if(!elem.hasClass('moby-submenu-open')) {
+        elem.html(mobyCloseIcon);
+        elem.addClass('moby-submenu-open');
+        if(multiLevel === true) {
+            elem.parent('a').parent('li').find('> ul').addClass('moby-ul-active');
+        } else {
+            elem.parent('a').parent('li').find('> ul').slideDown(200);
+        }
     } else {
-        $(this).html(mobyOpenIcon);
-        $(this).removeClass('moby-submenu-open');
-        $(this).parent('a').parent('li').find('> ul').slideUp(200);
+        elem.html(mobyOpenIcon);
+        elem.removeClass('moby-submenu-open');
+        if(multiLevel === true) {
+            elem.parent('a').parent('li').find('> ul').removeClass('moby-ul-active');
+        } else {
+            elem.parent('a').parent('li').find('> ul').slideUp(200);
+        }
+    }
+    if($('body').find('#moby').find('ul.moby-ul-active').length > 0) {
+        $('body').find('#moby').addClass('moby-prev-visible');
+    } else {
+        $('body').find('#moby').removeClass('moby-prev-visible');
     }
 }
 
@@ -135,7 +152,6 @@ function mobyPreventDummyLinks(e) {
         }
     }
 }
-
 
 
 /**
@@ -211,7 +227,6 @@ $(document).ready(function(){
             if (typeof(moby.enableEscape) == 'undefined') {
                 moby.enableEscape = true;
             }
-
             // if insertAfter is not definded, leave blank
             if (typeof(moby.insertAfter) == 'undefined') {
                 moby.insertAfter = '';
@@ -225,6 +240,14 @@ $(document).ready(function(){
             // if overlayClass is not defined, assign dark as the default
             if (typeof(moby.overlayClass) == 'undefined') {
                 moby.overlayClass = 'dark';
+            }
+            // if multiLevel is not defined, set default to false
+            if (typeof(moby.multiLevel) =='undefined') {
+                moby.multiLevel = false;
+            }
+            // if the previous button text is not defined, set as 'Previous'
+            if (typeof(moby.previousContent) =='undefined') {
+                moby.previousContent = '<span>&larr; Previous</span>';
             }
 
             // if overlay is true
@@ -241,27 +264,44 @@ $(document).ready(function(){
 
             // create moby
             $('body').prepend('<div id="moby"></div>');
+            var mobySelector = $('body').find('#moby');
 
-            // If user specified insertBefore, then insert into #moby
-            if(moby.insertBefore !== '') {
-                $('#moby').prepend('<div id="moby-before">' + moby.insertBefore + '</div>');
+            // if the multi layer option is chosen, do not allow insert before / after
+            if(moby.multiLevel !== true) {
+                // If user specified insertBefore, then insert into #moby
+                if(moby.insertBefore !== '') {
+                    mobySelector.prepend('<div id="moby-before">' + moby.insertBefore + '</div>');
+                }
+
+                // If user specified insertafter, then insert into #moby
+                if(moby.insertAfter !== '') {
+                    mobySelector.append('<div id="moby-after">' + moby.insertAfter + '</div>');
+                }
             }
 
-            // If user specified insertafter, then insert into #moby
-            if(moby.insertAfter !== '') {
-                $('#moby').append('<div id="moby-after">' + moby.insertAfter + '</div>');
+            // If the user specified that the menu is multi-level, prepend the previous markup
+            if(moby.multiLevel === true) {
+                mobySelector.addClass('moby-has-multi-level');
+                mobySelector.prepend('<div id="moby-top-wrap"><div id="moby-prev"><span>' + moby.previousContent + '</span></div></div>');
+                mobySelector.on('click', '#moby-prev', function(){
+                    mobySelector.find('.moby-submenu-open').last().trigger('click');
+                })
             }
-
             // If the closeButton is desired (or left undefined) add the close button to #moby
-            if(moby.closeButton == true) {
-                $('#moby').prepend('<div id="moby-close">' + moby.closeButtonContent + '</div>');
-                $('#moby').find('#moby-close').on('click', function(){
+            if(moby.closeButton === true) {
+                if(moby.multiLevel === true) {
+                    mobySelector.find('#moby-top-wrap').prepend('<div id="moby-close">' + moby.closeButtonContent + '</div>');
+                } else {
+                    mobySelector.prepend('<div id="moby-close">' + moby.closeButtonContent + '</div>');
+                }
+
+                mobySelector.find('#moby-close').on('click', function(){
                     closemoby(moby.overlay);
                 });
             }
 
             // if the escapeLey functinality is desired (or left undefined), assign close function to the escape key
-            if(moby.enableEscape == true) {
+            if(moby.enableEscape === true) {
                 $(document).on('keydown', function(e){
                     if(e.keyCode == 27) {
                         closemoby(moby.overlay);
@@ -270,7 +310,7 @@ $(document).ready(function(){
             }
 
             // add class / type of menu to #moby
-            $('#moby').addClass(moby.menuClass + ' moby-hidden');
+            mobySelector.addClass(moby.menuClass + ' moby-hidden');
 
             // assign the open function to the mobyTrigger
             moby.mobyTrigger.on('click', function(){
@@ -283,10 +323,14 @@ $(document).ready(function(){
             });
 
             // Assign mobyExpandSubMenu to sub menu icons
-            $('#moby').on('click', '.moby-expand', mobyExpandSubMenu);
+            mobySelector.on('click', '.moby-expand', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                mobyExpandSubMenu($(this), moby.multiLevel);
+            });
 
             // Assign mobyPreventDummyLinks to links
-            $('#moby').on('click', 'a', mobyPreventDummyLinks);
+            mobySelector.on('click', 'a', mobyPreventDummyLinks);
 
             // assign the moby setting tot the global object
             mobyUsersSettings = moby;
@@ -294,4 +338,3 @@ $(document).ready(function(){
         }
     });
 });
-
