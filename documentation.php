@@ -34,8 +34,11 @@ $('nav#main-nav').moby({
 	menuClass		 	: 	'right-side', 
 	mobyTrigger		 	: 	$("#moby-button"), 
 	overlay			 	: 	true, 
-	overlayClass 	 	: 	'dark', 
-	subMenuOpenIcon  	: 	'&lt;span&gt;&amp;#x25BC;&lt;/span&gt;', 
+	overlayClass 	 	: 	'dark',
+    multiLevel 	 	    : 	false,
+    previousContent     : 	'&lt;span&gt;&amp;larr; Previous&lt;/span&gt;',
+    overlayClass 	 	: 	'dark',
+    subMenuOpenIcon  	: 	'&lt;span&gt;&amp;#x25BC;&lt;/span&gt;',
 	subMenuCloseIcon 	: 	'&lt;span&gt;&amp;#x25B2;&lt;/span&gt;',
 });</code>
 </pre>
@@ -106,6 +109,16 @@ $('nav#main-nav').moby({
 						<p>(<span class="green-font">string</span>) The icon displaying when the sub menus are showing (to prompt the user to collapse it) can be replaced with text, markup, font-awesome, etc.</p>
 						<p class="default">Default: '&lt;span&gt;&amp;#x25B2;&lt;/span&gt;'</p>
 					</div> <!-- /wrap -->
+                    <div class="option">
+                        <h2>multiLayer</h2>
+                        <p>(<span class="blue-font">boolean</span>) Set to <code class="language-javascript">true</code> to enable multi-layer navigation with previous button for navigating between layers. When using this option, <code class="language-css">#moby-before</code> and <code class="language-css">#moby-after</code> are disabled.</p>
+                        <p class="default">Default: false</p>
+                    </div> <!-- /wrap -->
+                    <div class="option">
+                        <h2>previousContent</h2>
+                        <p>(<span class="green-font">string</span>) This is the markup that is displayed inside of the previous button. By default, the previous button will not show if the user is on the first level of navigation.</p>
+                        <p class="default">Default: '&lt;span&gt;&amp;larr; Previous&lt;/span&gt;'</p>
+                    </div> <!-- /wrap -->
 					
 					
 				</div> <!-- /container -->
