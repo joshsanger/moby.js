@@ -1,5 +1,5 @@
 /* 
- * MOBY.LESS VERSION 1.7
+ * MOBY.LESS VERSION 1.7.1
  */
 #moby-overlay {
   -webkit-box-sizing: border-box;
@@ -17,11 +17,11 @@
   z-index: 2000;
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: all 0.25s;
-  -moz-transition: all 0.25s;
-  -ms-transition: all 0.25s;
-  -o-transition: all 0.25s;
-  transition: all 0.25s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
 }
 #moby-overlay.dark {
   background: rgba(0, 0, 0, 0.85);
@@ -41,14 +41,13 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #ffffff;
-  -webkit-transition: all 0.4s visibility 0s;
-  -moz-transition: all 0.4s visibility 0s;
-  -ms-transition: all 0.4s visibility 0s;
-  -o-transition: all 0.4s visibility 0s;
-  transition: all 0.4s visibility 0s;
+  -webkit-transition: all 0.4s, visibility 0s;
+  -moz-transition: all 0.4s, visibility 0s;
+  -o-transition: all 0.4s, visibility 0s;
+  -ms-transition: all 0.4s, visibility 0s;
+  transition: all 0.4s, visibility 0s;
   padding: 20px;
   right: 0;
-  overflow: auto;
 }
 #moby * {
   -webkit-box-sizing: border-box;
@@ -273,20 +272,49 @@
   right: 0;
   width: 280px;
   list-style: none;
-  -webkit-transform: translate3d(0,0,0);
-  -moz-transform: translate3d(0,0,0);
-  -ms-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
-  -ms-transition: all 0.4s;
   -o-transition: all 0.4s;
+  -ms-transition: all 0.4s;
   transition: all 0.4s;
   background: #ffffff;
 }
 #moby.moby-has-multi-level ul ul {
   display: block;
+}
+#moby.moby-has-multi-level.moby-ie-fix nav > ul > li ul {
+  height: calc(100vh - 78px);
+  top: 78px;
+  z-index: 2;
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+#moby.moby-has-multi-level.moby-ie-fix nav > ul > li > ul > li > ul {
+  z-index: 3;
+}
+#moby.moby-has-multi-level.moby-ie-fix nav > ul > li > ul > li > ul li ul {
+  z-index: 4;
+}
+#moby.moby-has-multi-level.moby-ie-fix nav > ul > li > ul > li > ul li ul li ul {
+  z-index: 5;
+}
+#moby.moby-has-multi-level.moby-ie-fix nav > ul > li > ul > li > ul li ul li ul li ul {
+  z-index: 6;
+}
+#moby.moby-has-multi-level nav > ul {
+  -webkit-transform: translate3d(280px,0,0);
+  -moz-transform: translate3d(280px,0,0);
+  -ms-transform: translate3d(280px,0,0);
+  transform: translate3d(280px,0,0);
+  -webkit-transition: all 0s 0.4s;
+  -moz-transition: all 0s 0.4s;
+  -o-transition: all 0s 0.4s;
+  -ms-transition: all 0s 0.4s;
+  transition: all 0s 0.4s;
 }
 #moby.moby-has-multi-level nav > ul > li ul {
   height: 100%;
@@ -316,11 +344,32 @@
   -o-transform: translate3d(0, 0, 0) !important;
   transform: translate3d(0, 0, 0) !important;
 }
+#moby.moby-has-multi-level.left-side nav > ul {
+  -webkit-transform: translate3d(-280px,0,0);
+  -moz-transform: translate3d(-280px,0,0);
+  -ms-transform: translate3d(-280px,0,0);
+  transform: translate3d(-280px,0,0);
+  -webkit-transform: all 0s 0.4s;
+  -moz-transform: all 0s 0.4s;
+  -ms-transform: all 0s 0.4s;
+  transform: all 0s 0.4s;
+}
 #moby.moby-has-multi-level.left-side nav > ul > li ul {
   -webkit-transform: translate3d(-100%,0,0);
   -moz-transform: translate3d(-100%,0,0);
   -ms-transform: translate3d(-100%,0,0);
   transform: translate3d(-100%,0,0);
+}
+#moby.moby-has-multi-level.moby-active nav > ul {
+  -webkit-transform: translate3d(0%,0,0);
+  -moz-transform: translate3d(0%,0,0);
+  -ms-transform: translate3d(0%,0,0);
+  transform: translate3d(0%,0,0);
+  -webkit-transition: all 0s;
+  -moz-transition: all 0s;
+  -o-transition: all 0s;
+  -ms-transition: all 0s;
+  transition: all 0s;
 }
 #moby.moby-has-multi-level:not(.moby-prev-visible) #moby-top-wrap #moby-close {
   width: 100%;

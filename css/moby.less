@@ -1,18 +1,20 @@
 /* 
- * MOBY.LESS VERSION 1.7
+ * MOBY.LESS VERSION 1.7.1
  */
 
 @moby-background: #ffffff;
 @moby-color: #9a989a;
 @mobyTopHeight: 78px;
 @mobyWidth: 280px;
+
 .moby-transition(...) {
     -webkit-transition: @arguments;
     -moz-transition: @arguments;
-    -ms-transition: @arguments;
     -o-transition: @arguments;
+    -ms-transition: @arguments;
     transition: @arguments;
 }
+
 .moby-transform(...) {
     -webkit-transform: @arguments;
     -moz-transform: @arguments;
@@ -32,7 +34,7 @@
     z-index: 2000;
     visibility: hidden;
     opacity: 0;
-    .moby-transition(all, 0.25s);
+    .moby-transition(all, 0.2s);
     &.dark {
         background: rgba(0,0,0,0.85);
     }
@@ -57,10 +59,9 @@
         box-sizing: border-box;
     }
     background: @moby-background;
-    .moby-transition(all 0.4s, visibility 0s);
+    .moby-transition(~"all 0.4s, visibility 0s");
     padding: 20px;
     right: 0;
-    overflow: auto;
     &.moby-hidden {
         visibility: hidden;
     }
@@ -247,16 +248,55 @@
             right: 0;
             width: @mobyWidth;
             list-style: none;
-            .moby-transform(~"translate3d(0,0,0)");
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
             .moby-transition(all, 0.4s);
             background: @moby-background;
             & ul {
                 display: block;
             }
         }
+        &.moby-ie-fix {
+            & nav {
+                & > ul {
+                    & > li {
+                        & ul {
+                            height: ~"calc(100vh - @{mobyTopHeight})";
+                            top: @mobyTopHeight;
+                            z-index: 2;
+                            .moby-transform(~"translate3d(100%,0,0)");
+                        }
+                        & > ul {
+                            & > li {
+                                & > ul {
+                                    z-index: 3;
+                                    & li {
+                                        & ul {
+                                            z-index: 4;
+                                            & li {
+                                                & ul{
+                                                    z-index: 5;
+                                                    & li {
+                                                        & ul {
+                                                            z-index: 6;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
         & nav {
             & > ul {
+                .moby-transform(~"translate3d(@{mobyWidth},0,0)");
+                .moby-transition(all, 0s, 0.4s);
                 & > li {
                     & ul {
                         height: 100%;
@@ -281,7 +321,6 @@
                                                 }
                                             }
                                         }
-
                                     }
                                 }
                             }
@@ -301,11 +340,21 @@
         &.left-side {
             & nav {
                 & > ul {
+                    .moby-transform(~"translate3d(-@{mobyWidth},0,0)");
+                    .moby-transform(all, 0s, 0.4s);
                     & > li {
                         & ul {
                             .moby-transform(~"translate3d(-100%,0,0)");
                         }
                     }
+                }
+            }
+        }
+        &.moby-active {
+            & nav {
+                & >ul {
+                    .moby-transform(~"translate3d(0%,0,0)");
+                    .moby-transition(all, 0s);
                 }
             }
         }

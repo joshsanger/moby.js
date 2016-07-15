@@ -2,7 +2,7 @@
  * T A B L E   O F   C O N T E N T S
  *
  * @author      Josh Sanger
- * @version     1.7
+ * @version     1.7.1
  *
  * 01. GLOBAL VARIABLES
  * 02. OPEN MOBY
@@ -335,6 +335,25 @@ $(document).ready(function(){
             // assign the moby setting tot the global object
             mobyUsersSettings = moby;
             mobyUsersSettings.userMenu = targetMenu;
+
+            // test for ie 11 & 10
+            var is_ie_11 = false;
+            var is_ie_10 = false;
+
+            // Check if the user's browser is IE11
+            if (Object.hasOwnProperty.call(window, "ActiveXObject") && !window.ActiveXObject)
+            {
+                is_ie_11 = true;
+            }
+
+            // Check if the user's browser is IE10
+            if(document.body.style['msTouchAction'] != undefined)
+            {
+                is_ie_10 = true;
+            }
+            if(is_ie_11 || is_ie_10) {
+                $('body').find('#moby').addClass('moby-ie-fix');
+            }
         }
     });
 });
