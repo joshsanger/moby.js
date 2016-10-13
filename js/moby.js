@@ -2,7 +2,7 @@
  * T A B L E   O F   C O N T E N T S
  *
  * @author      Josh Sanger
- * @version     1.7.1
+ * @version     1.7.2
  *
  * 01. GLOBAL VARIABLES
  * 02. OPEN MOBY
@@ -118,6 +118,9 @@ function mobyExpandSubMenu(elem, multiLevel) {
         elem.html(mobyCloseIcon);
         elem.addClass('moby-submenu-open');
         if(multiLevel === true) {
+            elem.parent('a').parent('li').parent('ul').addClass('moby-ul-overflow').animate({
+                scrollTop : 0
+            }, 400);
             elem.parent('a').parent('li').find('> ul').addClass('moby-ul-active');
         } else {
             elem.parent('a').parent('li').find('> ul').slideDown(200);
@@ -284,7 +287,7 @@ $(document).ready(function(){
                 mobySelector.addClass('moby-has-multi-level');
                 mobySelector.prepend('<div id="moby-top-wrap"><div id="moby-prev"><span>' + moby.previousContent + '</span></div></div>');
                 mobySelector.on('click', '#moby-prev', function(){
-                    mobySelector.find('.moby-submenu-open').last().trigger('click');
+                    mobySelector.find('.moby-submenu-open').last().trigger('click').parents('li').parent('ul').last().removeClass('moby-ul-overflow');
                 })
             }
             // If the closeButton is desired (or left undefined) add the close button to #moby

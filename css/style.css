@@ -1,7 +1,10 @@
 @charset "UTF-8";
 /* 
- * MOBY.LESS VERSION 1.7.1
+ * MOBY.LESS VERSION 1.7.2
  */
+.moby-ul-overflow {
+  overflow: hidden !important;
+}
 #moby-overlay {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
