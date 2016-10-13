@@ -2,7 +2,7 @@
  * T A B L E   O F   C O N T E N T S
  *
  * @author      Josh Sanger
- * @version     1.7.2
+ * @version     1.7.3
  *
  * 01. GLOBAL VARIABLES
  * 02. OPEN MOBY

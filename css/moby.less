@@ -1,5 +1,5 @@
 /* 
- * MOBY.LESS VERSION 1.7.2
+ * MOBY.LESS VERSION 1.7.3
  */
 
 @moby-background: #ffffff;
@@ -202,7 +202,7 @@
                 font-size: 16px;
                 font-weight: 400;
                 display: block;
-                padding: 10px 60px 10px 0;
+                padding: 10px 60px 10px 20px;
                 & .moby-expand {
                     position: absolute;
                     height: 100%;
@@ -248,7 +248,6 @@
             height: ~"calc(100vh - @{mobyTopHeight})";
             top: @mobyTopHeight;
             position: fixed;
-            right: 0;
             width: @mobyWidth;
             list-style: none;
             overflow-y: auto;
@@ -409,7 +408,7 @@
             }
         }
         & #moby-clone {
-            & ul {
+            & nav {
                 padding: 0 20px 20px 20px;
             }
         }

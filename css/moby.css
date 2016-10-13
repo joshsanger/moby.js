@@ -1,5 +1,5 @@
 /* 
- * MOBY.LESS VERSION 1.7.2
+ * MOBY.LESS VERSION 1.7.3
  */
 .moby-ul-overflow {
   overflow: hidden !important;
@@ -227,7 +227,7 @@
   font-size: 16px;
   font-weight: 400;
   display: block;
-  padding: 10px 60px 10px 0;
+  padding: 10px 60px 10px 20px;
 }
 #moby ul li a .moby-expand {
   position: absolute;
@@ -272,7 +272,6 @@
   height: calc(100vh - 78px);
   top: 78px;
   position: fixed;
-  right: 0;
   width: 280px;
   list-style: none;
   overflow-y: auto;
@@ -416,6 +415,6 @@
 #moby.moby-has-multi-level #moby-top-wrap #moby-prev > * {
   display: block;
 }
-#moby.moby-has-multi-level #moby-clone ul {
+#moby.moby-has-multi-level #moby-clone nav {
   padding: 0 20px 20px 20px;
 }

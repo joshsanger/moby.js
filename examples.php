@@ -7,7 +7,7 @@
 		<div class="container">
 			<h2>Moby.js Examples</h2>
 			<p>Examples that showcase some of Moby's options</p>
-			<a href="<?php echo BASE_URL;?>/dist/moby1.7.2.zip">Download 1.7</a>
+            <a href="<?php echo BASE_URL;?>/dist/moby1.7.3.zip">Download 1.7.3</a>
 		</div> <!-- /container -->
 	</section> <!-- / top-section -->
 	<article class="content">
