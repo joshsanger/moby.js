@@ -688,7 +688,7 @@ header nav > ul > li ul li > a.active {
   color: #ffffff;
 }
 #top-section {
-  background: #2196F3 url(../images/waves.png) no-repeat center center / cover;
+  background: #2196F3 url(../images/waves.svg) no-repeat center center / cover;
   height: 400px;
   color: #ffffff;
   display: -webkit-box;
