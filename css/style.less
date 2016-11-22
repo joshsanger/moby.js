@@ -5,10 +5,23 @@
 @black: #000000;
 @white: #ffffff;
 @orange: #ff5a34;
-@blue: #326572;
+@blue: #2196F3;
+@darkBlue: #0288D1;
 @grey:#9a989a;
 @darkGrey: #4a4a4a;
-* {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,small,
+strike, strong, sub, sup, tt, var,
+b, u, i, center, hr, input, textarea,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, main,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -16,6 +29,47 @@
 	-moz-box-sizing: border-box;
 	font-family: 'Lato', sans-serif;
 }
+
+
+// ---------- START FLEX ---------- //
+.flex-container(@flow: row, @wrap: nowrap){
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -moz-box;
+    display: flex;
+    -ms-flex-direction: @flow;
+    -webkit-flex-flow: @flow @wrap;
+    flex-flow: @flow @wrap;
+}
+.flex-wrap(@wrap){
+    -webkit-flex-wrap: @wrap;
+    -ms-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+.flex-order(@order){
+    -webkit-box-ordinal-group: @order;
+    -ms-box-ordinal-group: @order;
+    -ms-flex-order: @order;
+    -webkit-order: @order;
+    order: @order;
+}
+.flex(...){
+    -webkit-box-flex: @arguments;
+    -moz-box-flex: @arguments;
+    -webkit-flex: @arguments;
+    -ms-flex: @arguments;
+    flex: @arguments;
+}
+.align-items(@param){
+    -webkit-align-items: @param;
+    align-items: @param;
+}
+.justify-content(@param){
+    -webkit-justify-content: @param;
+    justify-content: @param;
+}
+
 #moby {
 	&.hidden {
 		display: none;
@@ -70,25 +124,25 @@ header {
 	z-index: 10;
 	border-bottom: solid 1px fade(@black, 15%);
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
-	
+    & .container {
+        .flex-container();
+        .justify-content(space-between);
+        .align-items(center);
+    }
 	& .text {
-		display: block;
-		float: left;
 		text-decoration: none;
-		padding: 30px 30px 30px 110px;
+        .flex-container();
+        padding: 12px 0;
+        .align-items(center);
 		& h1 {
 			font-weight: 300;
 			color: @blue;
-			font-size: 30px;
-			
+			font-size: 24px;
 		}
 		& img {
-			position: absolute;
-			max-width: 96px;
+			width: 60px;
+            margin-right: 15px;
 			height: auto;
-			left: 20px;
-			top: 50%;
-			.translateY();
 		}
 	}
 	#trigger-main-menu {
@@ -109,14 +163,13 @@ header {
 		}
 	}
 	nav {
-		float: right;
-		padding: 20px 0;
+		padding: 12px 0;
 		& ul {
 			list-style: none;
 		}
 		& > ul {
+            .flex-container();
 			& > li {
-				display: inline-block;
 				position: relative;
 				&:hover {
 					& > ul {
@@ -177,11 +230,28 @@ header {
 	}
 }
 #top-section {
-	background: @blue url(../images/heading.png) repeat center bottom;
-	
-	padding: 60px 0;
+	background: @blue url(../images/waves.png) no-repeat center center /cover;
+	height: 400px;
 	color: @white;
-	text-align: center;
+    .flex-container();
+    .align-items(center);
+	.justify-content(center);
+    text-align: center;
+    position: relative;
+    &::after {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background: #101010;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0.7;
+        z-index: 1;
+    }
+    & .container {
+        z-index: 2;
+    }
 	& h2 {
 		font-weight: 300;
 		padding-bottom: 20px;
@@ -341,7 +411,7 @@ header {
 	& h2 {
 		font-size: 22px;
 		margin-bottom: 30px;
-		color: @blue;
+		color: @darkGrey;
 		font-weight: 400;
 	}
 	& p {
@@ -371,7 +441,7 @@ header {
 	}
 }
 footer {
-	background: @blue;
+	background: @darkBlue;
 	padding: 40px 0;
 	color: @white;
 	font-size: 14px;

@@ -37,7 +37,7 @@
 		<div class="container">
 			
 			<a href="<?php echo BASE_URL;?>" class="text">
-				<img src="./images/moby.svg">
+				<img src="./images/moby-logo.svg">
 				<h1>Moby.js</h1>
 			</a>
 			<nav id="main-nav">
@@ -56,7 +56,6 @@
 			</nav>
 			<span id="trigger-main-menu" class="trigger-menu main-trigger" data-target="right-side">
 				<i class="fa fa-bars"></i>
-			</span>			
-			<div class="clear-float"></div>
+			</span>
 		</div> <!-- /container -->
 	</header> <!-- /main-header -->
