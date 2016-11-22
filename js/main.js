@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
 
 	$('#main-nav').moby({
 		mobyTrigger: $('.trigger-menu'),
-		insertBefore: '<img src="./images/moby.svg">',
+		insertBefore: '<img src="./images/moby-logo.svg">',
 		insertAfter: 'If you find a better library, let minnow',
 		overlay: true,
 		subMenuOpenIcon: "<i class='fa fa-angle-down'></i>", 
