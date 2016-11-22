@@ -652,7 +652,7 @@ header nav > ul > li > a.active {
   color: #ffffff;
 }
 header nav > ul > li ul {
-  z-index: 20px;
+  z-index: 20;
   position: absolute;
   min-width: 180px;
   top: calc(100% + 30px);
