@@ -943,6 +943,9 @@ span.green-font {
   header #trigger-main-menu {
     display: block;
   }
+  header .text {
+    padding: 15px 0;
+  }
 }
 @media screen and (max-width: 760px) {
   header .text {
