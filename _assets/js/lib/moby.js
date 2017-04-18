@@ -24,6 +24,33 @@
 var mobyUsersSettings = {};
 
 
+
+/**
+ * 02. INIT MOBY
+ * Sets up the moby class
+ */
+
+var Moby = function() {
+
+};
+
+
+
+/**
+ * 03. OPEN MOBY
+ * Function that runs when the Moby trigger is clicked, or the mobyOpen method is called
+ * @param       targetMenu          string      The Id of the menu that will be clones for mobile
+ * @param       overlay             boolean     Set to true if the overlay is to be shown
+ * @param       SubMenuOpenIcon     string      The markup for the icon to open sub-menus
+ * @param       SubMenuCloseIcon    string      The markup for the icon to close sub-menus
+ */
+Moby.prototype.mobyOpen = function(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon) {
+
+    // LEFT OFF HERE
+}
+
+
+
 /**
  * 02. OPEN MOBY
  * Function that runs when the Moby trigger is clicked, or the mobyOpen method is called
@@ -156,6 +183,23 @@ function mobyPreventDummyLinks(e) {
     }
 }
 
+
+/**
+ * 03. POLY FILL FOR CUSTOM EVENTS
+ * Poly fill for custom events for IE
+ */
+(function () {
+    function CustomEvent ( event, params ) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent( 'CustomEvent' );
+        evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+        return evt;
+    }
+
+    CustomEvent.prototype = window.Event.prototype;
+
+    window.CustomEvent = CustomEvent;
+})();
 
 /**
  * 07. MOBY SET UP
@@ -359,4 +403,31 @@ $(document).ready(function(){
             }
         }
     });
+
+
+    var mobyEvents = {};
+    mobyEvents.beforeOpen = new CustomEvent("beforeOpen",
+        {
+            bubbles: true,
+            cancelable: true
+        }
+    );
+    mobyEvents.afterOpen = new CustomEvent("afterOpen",
+        {
+            bubbles: true,
+            cancelable: true
+        }
+    );
+    mobyEvents.beforeClose = new CustomEvent("beforeClose",
+        {
+            bubbles: true,
+            cancelable: true
+        }
+    );
+    mobyEvents.afterClose = new CustomEvent("afterClose",
+        {
+            bubbles: true,
+            cancelable: true
+        }
+    );
 });
