@@ -4,7 +4,7 @@
 		</div> <!-- /container -->
 	</footer>
     <input type="hidden" id="assets" value="<?php echo BASE_URL;?>/_assets/">
-	<script src="<?php echo BASE_URL;?>/js/jquery-2.2.2.min.js"></script>
-	<script src="<?php echo BASE_URL;?>/js/master.min.js"></script>
+	<script src="<?php echo BASE_URL;?>/_assets/js/jquery-2.2.2.min.js"></script>
+	<script src="<?php echo BASE_URL;?>/_assets/js/main.min.js"></script>
 </body>
 </html>
