@@ -1,3 +1,6 @@
 /.idea/
-/images/favicon.ai
-/images/moby-logo-outline.svg
+/node_modules/
+/_assets/css/staging.less
+/_assets/css/master.min.css
+/_assets/js/main.min.css
+/build/

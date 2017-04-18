@@ -1,0 +1,42 @@
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+}
+.flex-wrapper {
+    .flex-container();
+    &.center {
+        .align-items(center);
+    }
+    &.top {
+        .align-items(flex-start);
+    }
+    &.bottom {
+        .align-items(flex-end);
+    }
+    &.middle {
+        .justify-content(center);
+    }
+    &.left {
+        .justify-content(flex-start);
+    }
+    &.right {
+        .justify-content(flex-end);
+    }
+    &.between {
+        .justify-content(space-between);
+    }
+    & > * {
+        &.half {
+            width: 48%;
+        }
+        &.third {
+            width: 31%;
+        }
+        &.quarter {
+            width: 23%;
+        }
+    }
+}

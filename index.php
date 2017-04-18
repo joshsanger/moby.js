@@ -1,7 +1,8 @@
 <?php
+    require_once('./_includes/config.php');
 	$active = 'overview';
 	$title = '';
-	require_once('./inc/header.php');
+	require_once('./_includes/header.php');
 ?>
 	<section id="top-section">
 		<div class="container">
@@ -90,4 +91,4 @@ $('nav#main-nav').moby({
 				</div> <!-- /container -->
 			</section>
 	</article> <!-- /content -->
-	<?php require_once('./inc/footer.php'); ?>
+	<?php require_once('./_includes/footer.php'); ?>

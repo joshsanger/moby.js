@@ -1,0 +1,59 @@
+@lightGrey: #f0f0f0;
+@black: #000000;
+@white: #ffffff;
+@orange: #ff5a34;
+@blue: #2196f3;
+@darkBlue: #0288d1;
+@grey: #9a989a;
+@darkGrey: #4a4a4a;
+
+.flex-container(@flow: row, @wrap: nowrap){
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -moz-box;
+    display: flex;
+    -ms-flex-direction: @flow;
+    -webkit-flex-flow: @flow @wrap;
+    flex-flow: @flow @wrap;
+}
+.flex-wrap(@wrap){
+    -webkit-flex-wrap: @wrap;
+    -ms-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+.flex-order(@order){
+    -webkit-box-ordinal-group: @order;
+    -ms-box-ordinal-group: @order;
+    -ms-flex-order: @order;
+    -webkit-order: @order;
+    order: @order;
+}
+.flex(...){
+    -webkit-box-flex: @arguments;
+    -moz-box-flex: @arguments;
+    -webkit-flex: @arguments;
+    -ms-flex: @arguments;
+    flex: @arguments;
+}
+.align-items(@param){
+    -webkit-align-items: @param;
+    align-items: @param;
+}
+.justify-content(@param){
+    -webkit-justify-content: @param;
+    justify-content: @param;
+}
+.trans(...) {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments;
+}
+.transform(...) {
+    -webkit-transform: @arguments;
+    -mox-transform: @arguments;
+    -o-transform: @arguments;
+    -ms-transform: @arguments;
+    transform: @arguments;
+}
