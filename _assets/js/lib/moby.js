@@ -68,7 +68,7 @@ var Moby = function(options) {
             if (e.keyCode == 27) {
                 this.closeMoby();
             }
-        });
+        }.bind(this));
     }
 
     // assign the open function to the mobyTrigger
