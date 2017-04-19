@@ -82,11 +82,7 @@ var Moby = function(options) {
 
         e.preventDefault();
         e.stopPropagation();
-        console.log(e);
-
-        // left off here
-
-        this.mobyExpandSubMenu($(this));
+        this.mobyExpandSubMenu($(e.currentTarget));
     }.bind(this));
 
     // Assign mobyPreventDummyLinks to links
@@ -131,8 +127,6 @@ Moby.prototype.closeMoby = function() {
  */
 Moby.prototype.cloneMenu = function() {
 
-    console.log(this)
-
     // If user specified insertBefore, then insert into #moby
     if (this.insertBefore !== false) {
         this.mobySelector.prepend('<div class="moby-before">' + this.insertBefore + '</div>');
@@ -155,8 +149,6 @@ Moby.prototype.cloneMenu = function() {
  * Opens the Moby menu
  */
 Moby.prototype.openMoby = function() {
-
-    console.log(this);
 
     // remove the moby-hidden class if it exists
     if (this.mobySelector.hasClass('moby-hidden')) {
@@ -205,12 +197,12 @@ Moby.prototype.breakpointResize = function() {
  */
 Moby.prototype.mobyExpandSubMenu = function(elem) {
 
-    console.log(elem);
-
     if (!elem.hasClass('moby-submenu-open')) {
+        elem.addClass('moby-submenu-open');
         elem.html(this.subMenuCloseIcon);
         elem.parents('li').first().find('> ul').slideDown(Moby.slideTransition);
     } else {
+        elem.removeClass('moby-submenu-open');
         elem.html(this.subMenuOpenIcon);
         elem.parents('li').first().find('> ul').slideUp(Moby.slideTransition);
     }
