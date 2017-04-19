@@ -2,39 +2,31 @@
  * T A B L E   O F   C O N T E N T S
  *
  * @author      Josh Sanger
- * @version     1.7.3
+ * @version     2.0.0
  *
- * 01. GLOBAL VARIABLES
- * 02. OPEN MOBY
+ * 01. INIT MOBY
+ * 02. CLASS VARIABLES
  * 03. CLOSE MOBY
- * 04. BREAKPOINT RESIZE
- * 05. MOBY EXPAND SUB MENU
+ * 04. CLONE MENU
+ * 05. OPEN MOBY
+ * 06. BREAKPOINT RESIZE
+ * 07. MOBY EXPAND SUB MENU
  * 06. MOBY PREVENT DUMMY LINKS
- * 07. MOBY SET UP
- *
+ * 07. POLY FILL FOR CUSTOM EVENTS
+ * 08. CUSTOM EVENT SET UP
  */
-
 
 
 /**
- * 01. GLOBAL VARIABLES
- * Global Variables that will be used throughout the Library
+ * 01. INIT MOBY
+ * Sets up the Moby class
  */
-var mobyUsersSettings = {};
-
-
-
-/**
- * 02. INIT MOBY
- * Sets up the moby class
- */
-
 var Moby = function(options) {
 
     Moby.instances++;
 
     // Set defaults
-    this.selector           = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.mobyTrigger);
+    this.menu               = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.menu);
     this.mobyTrigger        = (typeof(options.mobyTrigger) == 'undefined' ? $('#moby-button') : options.mobyTrigger);
     this.overlay            = (typeof(options.overlay) == 'undefined' ? true : options.overlay);
     this.menuClass          = (typeof(options.menuClass) == 'undefined' ? 'right-side' : options.menuClass);
@@ -47,186 +39,198 @@ var Moby = function(options) {
     this.insertAfter        = (typeof(options.insertAfter) == 'undefined' ? false : options.insertAfter);
     this.insertBefore       = (typeof(options.insertBefore) == 'undefined' ? false : options.insertBefore);
     this.overlayClass       = (typeof(options.overlayClass) == 'undefined' ? 'dark' : options.overlayClass);
-    this.multiLevel         = (typeof(options.multiLevel) == 'undefined' ? false : options.multiLevel);
-    this.previousContent    = (typeof(options.previousContent) == 'undefined' ? '<span>&larr; Previous</span>' : options.previousContent);
-
 
     // add the overlay to the beginning of the body
     if (this.overlay === true) {
 
         $('body').prepend('<div class="moby-overlay ' + this.overlayClass + '" id="moby-overlay' + Moby.instances + '"></div>');
-
-        this.overlaySelector = $('body').find('#moby-overlay' + Moby.instances);0
+        this.overlaySelector = $('body').find('#moby-overlay' + Moby.instances);
+        this.overlaySelector.on('click', this.closeMoby);
     }
+
+    // add moby markup
+    $('body').prepend('<div class="moby moby-hidden ' + this.menuClass + '" id="moby' + Moby.instances + '"></div>');
+    this.mobySelector = $('body').find('#moby' + Moby.instances);
+    this.cloneMenu();
+
+    // If the closeButton is desired (or left undefined) add the close button to #moby
+    if (options.closeButton === true) {
+        this.mobySelector.prepend('<div class="moby-close">' + options.closeButtonContent + '</div>');
+    }
+    this.mobySelector.on('click', '.moby-close', this.closeMoby);
+
+    // if the escapeLey functinality is desired (or left undefined), assign close function to the escape key
+    if (options.enableEscape === true) {
+
+        $(document).on('keydown', function(e) {
+
+            if (e.keyCode == 27) {
+                this.closeMoby();
+            }
+        });
+    }
+
+    // assign the open function to the mobyTrigger
+    options.mobyTrigger.on('click', this.openMoby);
+
+    // Assign breakpointResize function when the window resizes
+    $(window).on('resize', this.breakpointResize);
+
+    // Assign mobyExpandSubMenu to sub menu icons
+    this.mobySelector.on('click', '.moby-expand', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        this.mobyExpandSubMenu($(this));
+    });
+
+    // Assign mobyPreventDummyLinks to links
+    this.mobySelector.on('click', 'a', this.mobyPreventDummyLinks);
 };
 
-Moby.instances = 0;
 
+/**
+ * 02. CLASS VARIABLES
+ * Variables that will be used throughout the class
+ */
+
+Moby.instances       = 0;
+Moby.slideTransition = 200;
+
+
+/**
+ * 03. CLOSE MOBY
+ * Closes the Moby menu
+ */
 
 Moby.prototype.closeMoby = function() {
 
-};
+    var mobyActive = $('body').find('.moby.moby-active');
 
-$(document).ready(function() {
+    if (mobyActive.length > 0) {
 
-    $('body').on('click', '.moby-overlay', Moby.prototype.closeMoby);
-});
-
-
-/**
- * 03. OPEN MOBY
- * Function that runs when the Moby trigger is clicked, or the mobyOpen method is called
- * @param       targetMenu          string      The Id of the menu that will be clones for mobile
- * @param       overlay             boolean     Set to true if the overlay is to be shown
- * @param       SubMenuOpenIcon     string      The markup for the icon to open sub-menus
- * @param       SubMenuCloseIcon    string      The markup for the icon to close sub-menus
- */
-Moby.prototype.mobyOpen = function(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon) {
-
-    // LEFT OFF HERE
-}
-
-
-
-/**
- * 02. OPEN MOBY
- * Function that runs when the Moby trigger is clicked, or the mobyOpen method is called
- *
- * @param       targetMenu          string      The Id of the menu that will be clones for mobile
- * @param       overlay             boolean     Set to true if the overlay is to be shown
- * @param       SubMenuOpenIcon     string      The markup for the icon to open sub-menus
- * @param       SubMenuCloseIcon    string      The markup for the icon to close sub-menus
- */
-function openmoby(targetMenu, overlay, subMenuOpenIcon, subMenuCloseIcon) {
-
-    // remove the moby-hidden class if it exists
-    if($('#moby.moby-hidden').length > 0) {
-        $('#moby').removeClass('moby-hidden');
+        if (this.overlay === true) {
+            $('body').find('.moby-overlay.moby-overlay-active').removeClass('moby-overlay-active');
+        }
+        mobyActive.removeClass('moby-active');
+        $('body').removeClass('moby-body-fixed');
     }
 
-    // .moby-active should be used to initiate the animation in your css file
-    $('#moby').addClass('moby-active');
+    this.mobySelector.trigger('mobyClosed');
+};
+
+
+/**
+ * 04. CLONE MENU
+ * Clones the menu that the user specified and removes all ids
+ */
+Moby.prototype.cloneMenu = function() {
+
+    // If user specified insertBefore, then insert into #moby
+    if (options.insertBefore !== false) {
+        this.mobySelector.prepend('<div class="moby-before">' + options.insertBefore + '</div>');
+    }
+
+    this.menu.clone().appendTo(this.mobySelector);
+
+    this.menu.removeAttr('id').find('*').removeAttr('id');
+    this.menu.find('li ul').parent().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
+
+    // If user specified insertafter, then insert into #moby
+    if (options.insertAfter !== false) {
+        this.mobySelector.append('<div class="moby-after">' + options.insertAfter + '</div>');
+    }
+};
+
+
+/**
+ * 05. OPEN MOBY
+ * Opens the Moby menu
+ */
+Moby.prototype.openMoby = function() {
+
+    // remove the moby-hidden class if it exists
+    if (this.mobySelector.hasClass('moby-hidden')) {
+        this.mobySelector.removeClass('moby-hidden');
+    }
+
+    // moby-active should be used to initiate the animation in your css file
+    this.mobySelector.addClass('moby-active');
 
     // When the menu is open, don't allow the user to scroll through the page
     $('body').addClass('moby-body-fixed');
 
     // Show the overlay
-    if(overlay == true) {
-        $('#moby-overlay').addClass('moby-overlay-active');
+    if (this.overlay === true) {
+        this.overlaySelector.addClass('moby-overlay-active');
     }
-    // The first time the button is clicked, clone the desired menu, assign sub menu open and close icons, and insert content after mobile menu
-    if($('#moby-clone').length < 1) {
-        $('#' + targetMenu).clone().appendTo('#moby');
-        $('#moby #' + targetMenu).attr('id', 'moby-clone').removeAttr('class');
-        $('#moby li').find('ul').parent().find('> a').append("<span class='moby-expand'>" + subMenuOpenIcon + '</span>');
-        $('.moby-expand').attr({
-            'data-open': subMenuOpenIcon,
-            'data-close': subMenuCloseIcon
-        });
 
-        // If #moby-after exists, move it to the bottom of #moby
-        if($('#moby-after').length > 0) {
-            $('#moby-after').appendTo('#moby');
-        }
-    }
-}
-
-
+    this.mobySelector.trigger('mobyOpened');
+};
 
 
 /**
- * 03. CLOSE MOBY
- * Closes Moby when the close button, overlay, escape key, or the mobyClose method is called
- *
- * @param       overlay             boolean     Set to true if the overlay is to be shown
+ * 06. BREAKPOINT RESIZE
+ * Checks to see if the viewport width has changed. If so, close the menu
  */
-function closemoby(overlay) {
-    if($('#moby').hasClass('moby-active')) {
-        if(overlay == true) {
-            $('#moby-overlay').removeClass('moby-overlay-active');
-        }
-        $('#moby').removeClass('moby-active');
-        $('body').removeClass('moby-body-fixed');
-    }
-}
+Moby.prototype.breakpointResize = function() {
 
-
-/**
- * 04. BREAKPOINT RESIZE
- * Closes Moby if the user increases the screen size past the mobile menu breakpoint
- *
- * @see     closemoby()
- */
-function breakpointResize(breakpoint, overlay) {
     var w = window.outerWidth;
-    if (w > breakpoint && $('#moby').hasClass('moby-active')) {
-        closemoby(overlay);
+
+    if (breakPoint === false) {
+        return false;
+    } else {
+
+        if (w >= this.breakpointResize && this.mobySelector.hasClass('moby-active')) {
+            this.closeMoby();
+        }
     }
-}
+};
+
 
 /**
- * 05. MOBY EXPAND SUB MENU
- * Expands hidden sub menu items. This function takes advantage of jQuery's slideUp and slideDown functions,
- * and swaps the icons depending on the open state of the sub menu.
+ * 07. MOBY EXPAND SUB MENU
+ * Expands the sub menu (nested <ul>)
  *
- * @param       elem            element     The element that was clicked
- * @param       multiLevel      boolean     Set to true if the menu has multilevel
- *
+ * @param       elem        element     The element that was clicked
  */
-function mobyExpandSubMenu(elem, multiLevel) {
+Moby.prototype.mobyExpandSubMenu = function(elem) {
 
-    var mobyOpenIcon = elem.data('open');
-    var mobyCloseIcon =elem.data('close');
-
-    if(!elem.hasClass('moby-submenu-open')) {
-        elem.html(mobyCloseIcon);
-        elem.addClass('moby-submenu-open');
-        if(multiLevel === true) {
-            elem.parent('a').parent('li').parent('ul').addClass('moby-ul-overflow').animate({
-                scrollTop : 0
-            }, 400);
-            elem.parent('a').parent('li').find('> ul').addClass('moby-ul-active');
-        } else {
-            elem.parent('a').parent('li').find('> ul').slideDown(200);
-        }
+    if (!elem.hasClass('moby-submenu-open')) {
+        elem.html(this.subMenuCloseIcon);
+        elem.parents('li').first().find('> ul').slideDown(Moby.slideTransition);
     } else {
-        elem.html(mobyOpenIcon);
-        elem.removeClass('moby-submenu-open');
-        if(multiLevel === true) {
-            elem.parent('a').parent('li').find('> ul').removeClass('moby-ul-active');
-        } else {
-            elem.parent('a').parent('li').find('> ul').slideUp(200);
-        }
+        elem.html(this.subMenuOpenIcon);
+        elem.parents('li').first().find('> ul').slideUp(Moby.slideTransition);
     }
-    if($('body').find('#moby').find('ul.moby-ul-active').length > 0) {
-        $('body').find('#moby').addClass('moby-prev-visible');
-    } else {
-        $('body').find('#moby').removeClass('moby-prev-visible');
-    }
-}
+};
 
 
 /**
  * 06. MOBY PREVENT DUMMY LINKS
  * Prevents the default link behavior on links with no URL, then triggers the .moby-expand
- *
  */
-function mobyPreventDummyLinks(e) {
-    if($(this).attr('href') == "#") {
+Moby.prototype.mobyPreventDummyLinks = function(e) {
+
+    var mobyExpand = $(this).find('> .moby-expand');
+
+    if ($(this).attr('href') == "#") {
+
         e.preventDefault();
-        if($(this).find('> .moby-expand').length > 0) {
-            $(this).find(' > .moby-expand').trigger('click');
+
+        if (mobyExpand.length > 0) {
+            mobyExpand.trigger('click');
         }
     }
-}
+};
 
 
 /**
- * 03. POLY FILL FOR CUSTOM EVENTS
+ * 07. POLY FILL FOR CUSTOM EVENTS
  * Poly fill for custom events for IE
  */
 (function () {
-    function CustomEvent ( event, params ) {
+
+    function CustomEvent (event, params) {
         params = params || { bubbles: false, cancelable: false, detail: undefined };
         var evt = document.createEvent( 'CustomEvent' );
         evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
@@ -238,230 +242,21 @@ function mobyPreventDummyLinks(e) {
     window.CustomEvent = CustomEvent;
 })();
 
-/**
- * 07. MOBY SET UP
- * Sets up the moby menu, settings, and methods
- *
- * @see     closemoby
- * @see     openmoby
- */
 
+/**
+ * 08. CUSTOM EVENT SET UP
+ * Sets up the moby menu, settings, and methods
+ */
 $(document).ready(function(){
 
-
-    $.fn.extend({
-
-        // Method to close Moby
-        mobyClose: function(){
-            closemoby(mobyUsersSettings.overlay);
-        },
-
-        // Method to open Moby
-        mobyOpen: function(){
-            openmoby(mobyUsersSettings.userMenu, mobyUsersSettings.overlay, mobyUsersSettings.subMenuOpenIcon, mobyUsersSettings.subMenuCloseIcon, mobyUsersSettings.insertAfter);
-        },
-
-        // Main moby function
-        moby: function(moby){
-            // the menu that will become mobile friendly
-            var targetMenu = $(this).attr('id');
-
-
-            // if mobyTrigger is not defined, set to default button
-            if (typeof(moby.mobyTrigger) =='undefined') {
-                moby.mobyTrigger = $('#moby-button');
-            }
-
-            // if overlay is not defined, set to TRUE
-            if (typeof(moby.overlay) =='undefined') {
-                moby.overlay = true;
-            }
-
-            // If menuClass  is not defined assign right-side as default
-            if (typeof(moby.menuClass) =='undefined') {
-                moby.menuClass = 'right-side';
-            }
-
-            // If subMenuOpenIcon  is not defined assign fa-angle-down as default
-            if (typeof(moby.subMenuOpenIcon) =='undefined') {
-                moby.subMenuOpenIcon = '<span>&#x25BC;</span>';
-            }
-
-            // If subMenuCloseIcon is not defined assign fa-angle-up as default
-            if (typeof(moby.subMenuCloseIcon) =='undefined') {
-                moby.subMenuCloseIcon = '<span>&#x25B2;</span>';
-            }
-
-            // if closeButton is not defined assign FALSE as default
-            if (typeof(moby.closeButton) =='undefined') {
-                moby.closeButton = true;
-            }
-
-            // if closeButtonContent is not defined assign icon as default
-            if (typeof(moby.closeButtonContent) == 'undefined') {
-                moby.closeButtonContent = '<span>X</span> Close Menu';
-            }
-
-            // if breakpoint is not defined assign 980 as default
-            if (typeof(moby.breakpoint) == 'undefined') {
-                moby.breakpoint = 1024;
-            }
-
-            // if enableEscape is not defines, assign TRUE as default
-            if (typeof(moby.enableEscape) == 'undefined') {
-                moby.enableEscape = true;
-            }
-            // if insertAfter is not definded, leave blank
-            if (typeof(moby.insertAfter) == 'undefined') {
-                moby.insertAfter = '';
-            }
-
-            // if insertBefore is not definded, leave blank
-            if (typeof(moby.insertBefore) == 'undefined') {
-                moby.insertBefore = '';
-            }
-
-            // if overlayClass is not defined, assign dark as the default
-            if (typeof(moby.overlayClass) == 'undefined') {
-                moby.overlayClass = 'dark';
-            }
-            // if multiLevel is not defined, set default to false
-            if (typeof(moby.multiLevel) =='undefined') {
-                moby.multiLevel = false;
-            }
-            // if the previous button text is not defined, set as 'Previous'
-            if (typeof(moby.previousContent) =='undefined') {
-                moby.previousContent = '<span>&larr; Previous</span>';
-            }
-
-            // if overlay is true
-            if(moby.overlay == true) {
-
-                // add the overlay to the beginning of the body
-                $('body').prepend('<div id="moby-overlay" class="' + moby.overlayClass + '"></div>');
-
-                // assign function when overlay is clicked
-                $('#moby-overlay').on('click', function(){
-                    closemoby(moby.overlay);
-                });
-            }
-
-            // create moby
-            $('body').prepend('<div id="moby"></div>');
-            var mobySelector = $('body').find('#moby');
-
-            // if the multi layer option is chosen, do not allow insert before / after
-            if(moby.multiLevel !== true) {
-                // If user specified insertBefore, then insert into #moby
-                if(moby.insertBefore !== '') {
-                    mobySelector.prepend('<div id="moby-before">' + moby.insertBefore + '</div>');
-                }
-
-                // If user specified insertafter, then insert into #moby
-                if(moby.insertAfter !== '') {
-                    mobySelector.append('<div id="moby-after">' + moby.insertAfter + '</div>');
-                }
-            }
-
-            // If the user specified that the menu is multi-level, prepend the previous markup
-            if(moby.multiLevel === true) {
-                mobySelector.addClass('moby-has-multi-level');
-                mobySelector.prepend('<div id="moby-top-wrap"><div id="moby-prev"><span>' + moby.previousContent + '</span></div></div>');
-                mobySelector.on('click', '#moby-prev', function(){
-                    mobySelector.find('.moby-submenu-open').last().trigger('click').parents('li').parent('ul').last().removeClass('moby-ul-overflow');
-                })
-            }
-            // If the closeButton is desired (or left undefined) add the close button to #moby
-            if(moby.closeButton === true) {
-                if(moby.multiLevel === true) {
-                    mobySelector.find('#moby-top-wrap').prepend('<div id="moby-close">' + moby.closeButtonContent + '</div>');
-                } else {
-                    mobySelector.prepend('<div id="moby-close">' + moby.closeButtonContent + '</div>');
-                }
-
-                mobySelector.find('#moby-close').on('click', function(){
-                    closemoby(moby.overlay);
-                });
-            }
-
-            // if the escapeLey functinality is desired (or left undefined), assign close function to the escape key
-            if(moby.enableEscape === true) {
-                $(document).on('keydown', function(e){
-                    if(e.keyCode == 27) {
-                        closemoby(moby.overlay);
-                    }
-                });
-            }
-
-            // add class / type of menu to #moby
-            mobySelector.addClass(moby.menuClass + ' moby-hidden');
-
-            // assign the open function to the mobyTrigger
-            moby.mobyTrigger.on('click', function(){
-                openmoby(targetMenu, moby.overlay, moby.subMenuOpenIcon, moby.subMenuCloseIcon, moby.insertAfter);
-            });
-
-            // Assign breakpointResize function when the window resizes
-            $(window).on('resize', function(){
-                breakpointResize(moby.breakpoint, moby.overlay);
-            });
-
-            // Assign mobyExpandSubMenu to sub menu icons
-            mobySelector.on('click', '.moby-expand', function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                mobyExpandSubMenu($(this), moby.multiLevel);
-            });
-
-            // Assign mobyPreventDummyLinks to links
-            mobySelector.on('click', 'a', mobyPreventDummyLinks);
-
-            // assign the moby setting tot the global object
-            mobyUsersSettings = moby;
-            mobyUsersSettings.userMenu = targetMenu;
-
-            // test for ie 11 & 10
-            var is_ie_11 = false;
-            var is_ie_10 = false;
-
-            // Check if the user's browser is IE11
-            if (Object.hasOwnProperty.call(window, "ActiveXObject") && !window.ActiveXObject)
-            {
-                is_ie_11 = true;
-            }
-
-            // Check if the user's browser is IE10
-            if(document.body.style['msTouchAction'] != undefined)
-            {
-                is_ie_10 = true;
-            }
-            if(is_ie_11 || is_ie_10) {
-                $('body').find('#moby').addClass('moby-ie-fix');
-            }
-        }
-    });
-
-
-    var mobyEvents = {};
-    mobyEvents.beforeOpen = new CustomEvent("beforeOpen",
+    Moby.mobyEvents = {};
+    Moby.mobyEvents.mobyOpened = new CustomEvent("mobyOpened",
         {
             bubbles: true,
             cancelable: true
         }
     );
-    mobyEvents.afterOpen = new CustomEvent("afterOpen",
-        {
-            bubbles: true,
-            cancelable: true
-        }
-    );
-    mobyEvents.beforeClose = new CustomEvent("beforeClose",
-        {
-            bubbles: true,
-            cancelable: true
-        }
-    );
-    mobyEvents.afterClose = new CustomEvent("afterClose",
+    Moby.mobyEvents.mobyClosed = new CustomEvent("mobyClosed",
         {
             bubbles: true,
             cancelable: true
