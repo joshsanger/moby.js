@@ -4,9 +4,43 @@
 
 @moby-background: #ffffff;
 @moby-color: #9a989a;
-@mobyTopHeight: 78px;
-@mobyWidth: 280px;
+@moby-width: 280px;
+@moby-blue: #2196f3;
 
+
+
+.moby-flex-container(@flow: row, @wrap: nowrap){
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -moz-box;
+    display: flex;
+    -ms-flex-direction: @flow;
+    -webkit-flex-flow: @flow @wrap;
+    flex-flow: @flow @wrap;
+}
+.moby-flex-order(@order){
+    -webkit-box-ordinal-group: @order;
+    -ms-box-ordinal-group: @order;
+    -ms-flex-order: @order;
+    -webkit-order: @order;
+    order: @order;
+}
+.moby-flex(...){
+    -webkit-box-flex: @arguments;
+    -moz-box-flex: @arguments;
+    -webkit-flex: @arguments;
+    -ms-flex: @arguments;
+    flex: @arguments;
+}
+.moby-align-items(@param){
+    -webkit-align-items: @param;
+    align-items: @param;
+}
+.moby-justify-content(@param){
+    -webkit-justify-content: @param;
+    justify-content: @param;
+}
 .moby-transition(...) {
     -webkit-transition: @arguments;
     -moz-transition: @arguments;
@@ -20,9 +54,6 @@
     -moz-transform: @arguments;
     -ms-transform: @arguments;
     transform: @arguments;
-}
-.moby-ul-overflow {
-    overflow: hidden !important;
 }
 .moby-overlay {
     -webkit-box-sizing: border-box;
@@ -63,7 +94,6 @@
     }
     background: @moby-background;
     .moby-transition(~"all 0.4s, visibility 0s");
-    padding: 20px;
     right: 0;
     &.moby-hidden {
         visibility: hidden;
@@ -73,11 +103,11 @@
         z-index: 3000;
         top: 0;
         height: 100%;
-        .moby-transform(~"translateX(300px)");
-        width: @mobyWidth;
+        width: 30%;
+        min-width: @moby-width;
+        .moby-transform(~"translateX(100%)");
         &.moby-active {
-            .moby-transform(~"translateX(0px)");
-            border-left: solid 1px rgba(0,0,0,0.08);
+            .moby-transform(~"translateX(0)");
         }
     }
     &.fade {
@@ -104,7 +134,7 @@
         top: 0;
         height: 100%;
         left: 0px;
-        width: @mobyWidth;
+        width: @moby-width;
         .moby-transform(~"translateX(-300px)");
 
         &.moby-active {
@@ -190,228 +220,76 @@
         & li {
             & ul {
                 & a {
-                    padding: 10px 60px 10px 20px;
+                    padding: 15px 90px 30px 30px;
                     font-weight: 300;
                 }
             }
             & a {
-                border-bottom: solid 1px darken(@moby-background, 6%);
                 position: relative;
                 color: @moby-color;
                 text-decoration: none;
                 font-size: 16px;
                 font-weight: 400;
                 display: block;
-                padding: 10px 60px 10px 20px;
+                padding: 30px 90px 30px 30px;
+                text-align: left;
                 & .moby-expand {
                     position: absolute;
                     height: 100%;
-                    background: darken(@moby-background, 6%);
-                    width: 40px;
-                    text-align: center;
+                    width: 60px;
                     top: 0;
                     right: 0;
                     height: 100%;
+                    text-align: center;
                     padding: 10px;
-                    & span {
-                        font-size: 12px;
-                    }
+                    color: @moby-blue;
+                    .moby-flex-container();
+                    .moby-align-items(center);
+                    .moby-justify-content(center);
                     & i,
-                    span {
-                        width: 40px;
-                        left: 0;
-                        position: absolute;
-                        top: 50%;
-                        .moby-transform(~"translate3d(0,-50%,0)");
+                    & span {
+                        font-size: 20px;
                     }
                 }
             }
         }
     }
-    &:not(.moby-has-multi-level) {
-        & .moby-close {
-            color: @moby-color;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 10px 0;
-            margin-bottom: 20px;
-            & span {
-                font-weight: bold;
-                margin-right: 10px;
+    & .moby-close {
+        color: @moby-color;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 400;
+        padding: 30px;
+        background: #f5f5f5;
+        .moby-flex-container();
+        & .moby-close-icon {
+            font-weight: bold;
+            margin-right: 15px;
+            position: relative;
+            height: 20px;
+            width: 20px;
+            .moby-transform(~"rotate(45deg)");
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: @moby-color;
+                top: 50%;
+                margin-top: -1px;
             }
-        }
-    }
-    &.moby-has-multi-level {
-        padding: 0;
-        & ul {
-            height: ~"calc(100vh - @{mobyTopHeight})";
-            top: @mobyTopHeight;
-            position: fixed;
-            width: @mobyWidth;
-            list-style: none;
-            overflow-y: auto;
-            overflow-x: hidden;
-            .moby-transition(all, 0.4s);
-            background: @moby-background;
-            & ul {
-                display: block;
-            }
-        }
-        &.moby-ie-fix {
-            & nav {
-                & > ul {
-                    & > li {
-                        & ul {
-                            height: ~"calc(100vh - @{mobyTopHeight})";
-                            top: @mobyTopHeight;
-                            z-index: 2;
-                            .moby-transform(~"translate3d(100%,0,0)");
-                        }
-                        & > ul {
-                            & > li {
-                                & > ul {
-                                    z-index: 3;
-                                    & li {
-                                        & ul {
-                                            z-index: 4;
-                                            & li {
-                                                & ul{
-                                                    z-index: 5;
-                                                    & li {
-                                                        & ul {
-                                                            z-index: 6;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-        & nav {
-            & > ul {
-                .moby-transform(~"translate3d(@{mobyWidth},0,0)");
-                .moby-transition(all, 0s, 0.4s);
-                & > li {
-                    & ul {
-                        height: 100%;
-                        top: 0;
-                        z-index: 2;
-                        .moby-transform(~"translate3d(100%,0,0)");
-                    }
-                    & > ul {
-                        & > li {
-                            & > ul {
-                                z-index: 3;
-                                & li {
-                                    & ul {
-                                        z-index: 4;
-                                        & li {
-                                            & ul{
-                                                z-index: 5;
-                                                & li {
-                                                    & ul {
-                                                        z-index: 6;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-        & ul.moby-ul-active {
-            -webkit-transform: translate3d(0,0,0) !important;
-            -moz-transform: translate3d(0,0,0) !important;
-            -ms-transform: translate3d(0,0,0) !important;
-            -o-transform: translate3d(0,0,0) !important;
-            transform: translate3d(0,0,0) !important;
-        }
-        &.left-side {
-            & nav {
-                & > ul {
-                    .moby-transform(~"translate3d(-@{mobyWidth},0,0)");
-                    .moby-transform(all, 0s, 0.4s);
-                    & > li {
-                        & ul {
-                            .moby-transform(~"translate3d(-100%,0,0)");
-                        }
-                    }
-                }
-            }
-        }
-        &.moby-active {
-            & nav {
-                & >ul {
-                    .moby-transform(~"translate3d(0%,0,0)");
-                    .moby-transition(all, 0s);
-                }
-            }
-        }
-        &:not(.moby-prev-visible) {
-            & .moby-top-wrap {
-                & .moby-close {
-                    width: 100%;
-                }
-                & .moby-prev {
-                    display: none;
-                }
-            }
-
-        }
-        & .moby-top-wrap {
-            padding: 20px;
-            height: @mobyTopHeight;
             &::after {
                 content: '';
-                clear: both;
-                height: 0.0001em;
-                width: 100%;
-                display: block;
-            }
-            & .moby-close {
-                float: right;
-                line-height: @mobyTopHeight - 40px;
-                display: block;
-                color: @moby-color;
-                cursor: pointer;
-                font-size: 16px;
-                font-weight: 400;
-                & span {
-                    font-weight: bold;
-                    margin-right: 5px;
-                }
-            }
-            & .moby-prev {
-                float: left;
-                line-height: @mobyTopHeight - 40px;
-                color: @moby-color;
-                cursor: pointer;
-                font-size: 16px;
-                font-weight: 400;
-                display: block;
-                & > * {
-                    display: block;
-                }
+                position: absolute;
+                left: 50%;
+                height: 100%;
+                width: 2px;
+                background: @moby-color;
+                top: 0%;
+                margin-left: -1px;
             }
         }
-        & .moby-clone {
-            & nav {
-                padding: 0 20px 20px 20px;
-            }
-        }
-
     }
 }

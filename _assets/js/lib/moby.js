@@ -34,7 +34,7 @@ var Moby = function(options) {
     this.subMenuOpenIcon    = (typeof(options.subMenuOpenIcon) == 'undefined' ? '<span>&#x25BC;</span>' : options.subMenuOpenIcon);
     this.subMenuCloseIcon   = (typeof(options.subMenuCloseIcon) == 'undefined' ? '<span>&#x25B2;</span>' : options.subMenuCloseIcon);
     this.closeButton        = (typeof(options.closeButton) == 'undefined' ? true : options.closeButton);
-    this.closeButtonContent = (typeof(options.closeButtonContent) == 'undefined' ? '<span>X</span> Close Menu' : options.closeButtonContent);
+    this.closeButtonContent = (typeof(options.closeButtonContent) == 'undefined' ? '<span class="moby-close-icon"></span> Close Menu' : options.closeButtonContent);
     this.breakpoint         = (typeof(options.breakpoint) == 'undefined' ? 1024 : options.breakpoint);
     this.enableEscape       = (typeof(options.enableEscape) == 'undefined' ? true : options.enableEscape);
     this.insertAfter        = (typeof(options.insertAfter) == 'undefined' ? false : options.insertAfter);
@@ -132,10 +132,11 @@ Moby.prototype.cloneMenu = function() {
         this.mobySelector.prepend('<div class="moby-before">' + this.insertBefore + '</div>');
     }
 
+
     this.menu.clone().appendTo(this.mobySelector);
 
-    this.menu.removeAttr('id').find('*').removeAttr('id');
-    this.mobySelector.find('li ul').parent('li').find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
+    this.mobySelector.find('*[id]').removeAttr('id');
+    this.mobySelector.find('li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
 
     // If user specified insertafter, then insert into #moby
     if (this.insertAfter !== false) {
