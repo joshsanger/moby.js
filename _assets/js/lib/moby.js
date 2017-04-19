@@ -19,7 +19,6 @@
 /**
  * 01. GLOBAL VARIABLES
  * Global Variables that will be used throughout the Library
- *
  */
 var mobyUsersSettings = {};
 
@@ -30,10 +29,48 @@ var mobyUsersSettings = {};
  * Sets up the moby class
  */
 
-var Moby = function() {
+var Moby = function(options) {
+
+    Moby.instances++;
+
+    // Set defaults
+    this.selector           = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.mobyTrigger);
+    this.mobyTrigger        = (typeof(options.mobyTrigger) == 'undefined' ? $('#moby-button') : options.mobyTrigger);
+    this.overlay            = (typeof(options.overlay) == 'undefined' ? true : options.overlay);
+    this.menuClass          = (typeof(options.menuClass) == 'undefined' ? 'right-side' : options.menuClass);
+    this.subMenuOpenIcon    = (typeof(options.subMenuOpenIcon) == 'undefined' ? '<span>&#x25BC;</span>' : options.subMenuOpenIcon);
+    this.subMenuCloseIcon   = (typeof(options.subMenuCloseIcon) == 'undefined' ? '<span>&#x25B2;</span>' : options.subMenuCloseIcon);
+    this.closeButton        = (typeof(options.closeButton) == 'undefined' ? true : options.closeButton);
+    this.closeButtonContent = (typeof(options.closeButtonContent) == 'undefined' ? '<span>X</span> Close Menu' : options.closeButtonContent);
+    this.breakpoint         = (typeof(options.breakpoint) == 'undefined' ? 1024 : options.breakpoint);
+    this.enableEscape       = (typeof(options.enableEscape) == 'undefined' ? true : options.enableEscape);
+    this.insertAfter        = (typeof(options.insertAfter) == 'undefined' ? false : options.insertAfter);
+    this.insertBefore       = (typeof(options.insertBefore) == 'undefined' ? false : options.insertBefore);
+    this.overlayClass       = (typeof(options.overlayClass) == 'undefined' ? 'dark' : options.overlayClass);
+    this.multiLevel         = (typeof(options.multiLevel) == 'undefined' ? false : options.multiLevel);
+    this.previousContent    = (typeof(options.previousContent) == 'undefined' ? '<span>&larr; Previous</span>' : options.previousContent);
+
+
+    // add the overlay to the beginning of the body
+    if (this.overlay === true) {
+
+        $('body').prepend('<div class="moby-overlay ' + this.overlayClass + '" id="moby-overlay' + Moby.instances + '"></div>');
+
+        this.overlaySelector = $('body').find('#moby-overlay' + Moby.instances);0
+    }
+};
+
+Moby.instances = 0;
+
+
+Moby.prototype.closeMoby = function() {
 
 };
 
+$(document).ready(function() {
+
+    $('body').on('click', '.moby-overlay', Moby.prototype.closeMoby);
+});
 
 
 /**
