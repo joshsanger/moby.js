@@ -24,7 +24,7 @@
 .moby-ul-overflow {
     overflow: hidden !important;
 }
-#moby-overlay {
+.moby-overlay {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -52,7 +52,7 @@
 .moby-body-fixed {
     overflow: hidden !important;
 }
-#moby {
+.moby {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -229,7 +229,7 @@
         }
     }
     &:not(.moby-has-multi-level) {
-        & #moby-close {
+        & .moby-close {
             color: @moby-color;
             cursor: pointer;
             font-size: 16px;
@@ -361,17 +361,17 @@
             }
         }
         &:not(.moby-prev-visible) {
-            & #moby-top-wrap {
-                & #moby-close {
+            & .moby-top-wrap {
+                & .moby-close {
                     width: 100%;
                 }
-                & #moby-prev {
+                & .moby-prev {
                     display: none;
                 }
             }
 
         }
-        & #moby-top-wrap {
+        & .moby-top-wrap {
             padding: 20px;
             height: @mobyTopHeight;
             &::after {
@@ -381,7 +381,7 @@
                 width: 100%;
                 display: block;
             }
-            & #moby-close {
+            & .moby-close {
                 float: right;
                 line-height: @mobyTopHeight - 40px;
                 display: block;
@@ -394,7 +394,7 @@
                     margin-right: 5px;
                 }
             }
-            & #moby-prev {
+            & .moby-prev {
                 float: left;
                 line-height: @mobyTopHeight - 40px;
                 color: @moby-color;
@@ -407,7 +407,7 @@
                 }
             }
         }
-        & #moby-clone {
+        & .moby-clone {
             & nav {
                 padding: 0 20px 20px 20px;
             }

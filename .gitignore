@@ -1,4 +1,5 @@
 /.idea/
+/_includes/config.php
 /node_modules/
 /_assets/css/staging.less
 /_assets/css/master.min.css

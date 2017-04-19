@@ -24,6 +24,7 @@
 var Moby = function(options) {
 
     Moby.instances++;
+    var mobyMenu = this;
 
     // Set defaults
     this.menu               = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.menu);
@@ -45,7 +46,7 @@ var Moby = function(options) {
 
         $('body').prepend('<div class="moby-overlay ' + this.overlayClass + '" id="moby-overlay' + Moby.instances + '"></div>');
         this.overlaySelector = $('body').find('#moby-overlay' + Moby.instances);
-        this.overlaySelector.on('click', this.closeMoby);
+        this.overlaySelector.on('click', this.closeMoby.bind(this));
     }
 
     // add moby markup
@@ -54,13 +55,13 @@ var Moby = function(options) {
     this.cloneMenu();
 
     // If the closeButton is desired (or left undefined) add the close button to #moby
-    if (options.closeButton === true) {
-        this.mobySelector.prepend('<div class="moby-close">' + options.closeButtonContent + '</div>');
+    if (this.closeButton === true) {
+        this.mobySelector.prepend('<div class="moby-close">' + this.closeButtonContent + '</div>');
     }
-    this.mobySelector.on('click', '.moby-close', this.closeMoby);
+    this.mobySelector.on('click', '.moby-close', this.closeMoby.bind(this));
 
     // if the escapeLey functinality is desired (or left undefined), assign close function to the escape key
-    if (options.enableEscape === true) {
+    if (this.enableEscape === true) {
 
         $(document).on('keydown', function(e) {
 
@@ -71,20 +72,25 @@ var Moby = function(options) {
     }
 
     // assign the open function to the mobyTrigger
-    options.mobyTrigger.on('click', this.openMoby);
+    this.mobyTrigger.on('click', this.openMoby.bind(this));
 
     // Assign breakpointResize function when the window resizes
-    $(window).on('resize', this.breakpointResize);
+    $(window).on('resize', this.breakpointResize.bind(this));
 
     // Assign mobyExpandSubMenu to sub menu icons
     this.mobySelector.on('click', '.moby-expand', function(e){
+
         e.preventDefault();
         e.stopPropagation();
+        console.log(e);
+
+        // left off here
+
         this.mobyExpandSubMenu($(this));
-    });
+    }.bind(this));
 
     // Assign mobyPreventDummyLinks to links
-    this.mobySelector.on('click', 'a', this.mobyPreventDummyLinks);
+    this.mobySelector.on('click', 'a', this.mobyPreventDummyLinks.bind(this));
 };
 
 
@@ -125,19 +131,21 @@ Moby.prototype.closeMoby = function() {
  */
 Moby.prototype.cloneMenu = function() {
 
+    console.log(this)
+
     // If user specified insertBefore, then insert into #moby
-    if (options.insertBefore !== false) {
-        this.mobySelector.prepend('<div class="moby-before">' + options.insertBefore + '</div>');
+    if (this.insertBefore !== false) {
+        this.mobySelector.prepend('<div class="moby-before">' + this.insertBefore + '</div>');
     }
 
     this.menu.clone().appendTo(this.mobySelector);
 
     this.menu.removeAttr('id').find('*').removeAttr('id');
-    this.menu.find('li ul').parent().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
+    this.mobySelector.find('li ul').parent('li').find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
 
     // If user specified insertafter, then insert into #moby
-    if (options.insertAfter !== false) {
-        this.mobySelector.append('<div class="moby-after">' + options.insertAfter + '</div>');
+    if (this.insertAfter !== false) {
+        this.mobySelector.append('<div class="moby-after">' + this.insertAfter + '</div>');
     }
 };
 
@@ -147,6 +155,8 @@ Moby.prototype.cloneMenu = function() {
  * Opens the Moby menu
  */
 Moby.prototype.openMoby = function() {
+
+    console.log(this);
 
     // remove the moby-hidden class if it exists
     if (this.mobySelector.hasClass('moby-hidden')) {
@@ -176,11 +186,11 @@ Moby.prototype.breakpointResize = function() {
 
     var w = window.outerWidth;
 
-    if (breakPoint === false) {
+    if (this.breakPoint === false) {
         return false;
     } else {
 
-        if (w >= this.breakpointResize && this.mobySelector.hasClass('moby-active')) {
+        if (w >= this.breakPoint && this.mobySelector.hasClass('moby-active')) {
             this.closeMoby();
         }
     }
@@ -194,6 +204,8 @@ Moby.prototype.breakpointResize = function() {
  * @param       elem        element     The element that was clicked
  */
 Moby.prototype.mobyExpandSubMenu = function(elem) {
+
+    console.log(elem);
 
     if (!elem.hasClass('moby-submenu-open')) {
         elem.html(this.subMenuCloseIcon);

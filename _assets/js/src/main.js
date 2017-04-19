@@ -1,7 +1,8 @@
-jQuery(document).ready(function($){
+$(document).ready(function(){
 
-	$('#main-nav').moby({
-		mobyTrigger: $('.trigger-menu'),
+    var menu = new Moby({
+        menu: $('#main-nav'),
+        mobyTrigger: $('.trigger-menu'),
 		insertBefore: '<img src="' + $('#assets').val() + 'images/moby-logo.svg">',
 		insertAfter: 'If you find a better library, let minnow',
 		overlay: true,
@@ -10,7 +11,7 @@ jQuery(document).ready(function($){
 		menuClass: 'right-side',
 		closeButton: true,
 		closeButtonContent: '<i class="material-icons">&#xE5CD;</i> Close Menu ',
-		breakpoint: 960, 
+		breakpoint: 960,
 		enableEscape: true
-	}, true);
+    });
 });
