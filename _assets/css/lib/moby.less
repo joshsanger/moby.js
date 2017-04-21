@@ -107,48 +107,112 @@
         height: 100%;
         width: 30%;
         min-width: @moby-width;
-        .moby-flex-container(row, wrap);
-        .align-items(center);
-        & > * {
-            width: 100%;
-        }
-
         .moby-transform(~"translateX(100%)");
+        padding: 60px 0 20px 0;
+        overflow: auto;
         &.moby-active {
             .moby-transform(~"translateX(0)");
         }
-        & nav {
-            //margin-top: -120px;
+        & .moby-inner {
+            height: 100%;
+            min-height: 520px;
+            & > p {
+                height: 40px;
+                .moby-flex-container();
+                .moby-align-items(center);
+                .moby-justify-content(center);
+                padding: 0 30px;
+                font-size: 13px;
+                text-align: center;
+            }
+        }
+        & .moby-close {
+            color: @moby-background;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 400;
+            padding: 20px;
+            .moby-flex-container();
+            .align-items(center);
+            background: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            & .moby-close-icon {
+                margin-right: 0;
+                height: 20px;
+                width: 20px;
+                display: inline-block;
+                position: relative;
+                &::before,
+                &::after {
+                    background: @moby-background;
+                }
+            }
+        }
+        & .moby-wrap {
+            height: ~"calc(100% - 40px)";
+            .moby-flex-container(row, wrap);
+            .align-items(center);
+            .moby-justify-content(center);
+            & > div {
+                width: 100%;
+            }
+            & img {
+                margin: 0 auto 40px auto;
+                display: block;
+                width: 100px;
+                height: auto;
+            }
+            & .moby-menu {
+
+
+                width: 100%;
+                & > * {
+                    width: 100%;
+                }
+            }
         }
         & ul {
             & li {
                 & ul {
                     & a {
-                        padding: 20px 90px 20px 90px;
+                        padding: 20px 70px 20px 70px;
+                        font-size: 16px;
+                        background: darken(@moby-blue, 10%);
                     }
                 }
                 & a {
                     position: relative;
                     color: @moby-background;
                     text-decoration: none;
-                    font-size: 20px;
+                    font-size: 18px;
                     font-weight: 400;
                     display: block;
-                    padding: 20px 90px 20px 90px;
+                    padding: 20px 70px 20px 70px;
                     text-align: center;
+                    .trans(color, 0.3s);
+                    &:hover {
+                        color: #e0e0e0;
+                    }
                     & .moby-expand {
                         position: absolute;
                         height: 100%;
-                        width: 60px;
+                        width: 50px;
                         top: 0;
                         right: 0;
                         height: 100%;
                         text-align: center;
                         padding: 10px;
-                        color: @moby-blue;
+                        color: @moby-background;
                         .moby-flex-container();
                         .moby-align-items(center);
                         .moby-justify-content(center);
+                        .trans(color, 0.3s);
+                        &:hover {
+                            color: #e0e0e0;
+                        }
                         & i,
                         & span {
                             font-size: 20px;
@@ -157,27 +221,7 @@
                 }
             }
         }
-        & .moby-close {
-            align-self: flex-start;
-            color: @moby-background;
-            cursor: pointer;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: 400;
-            padding: 30px;
-            background: transparent;
-            display: inline-block;
-            & .moby-close-icon {
-                margin-right: 0;
-                height: 20px;
-                width: 20px;
-                display: inline-block;
-                &::before,
-                &::after {
-                    background: @moby-background;
-                }
-            }
-        }
+
         & .moby-before {
             padding: 0 30px;
             & img {
