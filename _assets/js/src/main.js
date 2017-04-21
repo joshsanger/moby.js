@@ -14,6 +14,18 @@ $(document).ready(function(){
 		breakpoint: 960,
 		enableEscape: true
     });
+
+    var template = '<div class="moby-inner">';
+    template +=        '<div class="moby-close"><span class="moby-close-icon"></span></div>';
+    template +=        '<div class="moby-wrap">';
+    template +=            '<div>';
+    template +=                '<img src="' + $('#assets').val() + 'images/moby-logo-white.svg">';
+    template +=                '<div class="moby-menu"></div>';
+    template +=            '</div>';
+    template +=        '</div>';
+    template +=        '<p>If you see a better mobile menu, let minnow</p>';
+    template +=    '</div>';
+
     var rightMenu = new Moby({
         menu: $('#main-nav'),
         insertBefore: '<div><img src="' + $('#assets').val() + 'images/moby-logo-white.svg"></div>',
@@ -23,8 +35,7 @@ $(document).ready(function(){
         subMenuOpenIcon: '<i class="material-icons">&#xE313;</i>',
         subMenuCloseIcon: '<i class="material-icons">&#xE316;</i>',
         menuClass: 'moby-demo',
-        closeButton: true,
-        closeButtonContent: '<span class="moby-close-icon"></span>',
+        template : template,
         breakpoint: 960,
         enableEscape: true
     });
