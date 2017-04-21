@@ -16,13 +16,15 @@ $(document).ready(function(){
     });
     var rightMenu = new Moby({
         menu: $('#main-nav'),
+        insertBefore: '<div><img src="' + $('#assets').val() + 'images/moby-logo-white.svg"></div>',
+        insertAfter: '<p>If you find a better library, let minnow</p>',
         mobyTrigger: $('#right-side'),
         overlay: true,
         subMenuOpenIcon: '<i class="material-icons">&#xE313;</i>',
         subMenuCloseIcon: '<i class="material-icons">&#xE316;</i>',
-        menuClass: 'right-side',
+        menuClass: 'moby-demo',
         closeButton: true,
-        // closeButtonContent: '<i class="material-icons">&#xE5CD;</i> Close Menu ',
+        closeButtonContent: '<span class="moby-close-icon"></span>',
         breakpoint: 960,
         enableEscape: true
     });

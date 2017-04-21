@@ -37,9 +37,8 @@ var Moby = function(options) {
     this.closeButtonContent = (typeof(options.closeButtonContent) == 'undefined' ? '<span class="moby-close-icon"></span> Close Menu' : options.closeButtonContent);
     this.breakpoint         = (typeof(options.breakpoint) == 'undefined' ? 1024 : options.breakpoint);
     this.enableEscape       = (typeof(options.enableEscape) == 'undefined' ? true : options.enableEscape);
-    this.insertAfter        = (typeof(options.insertAfter) == 'undefined' ? false : options.insertAfter);
-    this.insertBefore       = (typeof(options.insertBefore) == 'undefined' ? false : options.insertBefore);
     this.overlayClass       = (typeof(options.overlayClass) == 'undefined' ? 'dark' : options.overlayClass);
+    this.template           = (typeof(options.template) == 'undefined' ? '<div class="moby-clone"></div>' : options.template);
 
     // add the overlay to the beginning of the body
     if (this.overlay === true) {
@@ -127,21 +126,16 @@ Moby.prototype.closeMoby = function() {
  */
 Moby.prototype.cloneMenu = function() {
 
-    // If user specified insertBefore, then insert into #moby
-    if (this.insertBefore !== false) {
-        this.mobySelector.prepend('<div class="moby-before">' + this.insertBefore + '</div>');
+    this.mobySelector.append(this.template);
+
+    if (this.mobySelector.find('.moby-clone').length < 1) {
+        this.mobySelector.append('<div class="moby-clone"></div>');
     }
 
+    this.menu.clone().appendTo(this.mobySelector.find('.moby-clone'));
 
-    this.menu.clone().appendTo(this.mobySelector);
-
-    this.mobySelector.find('*[id]').removeAttr('id');
-    this.mobySelector.find('li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
-
-    // If user specified insertafter, then insert into #moby
-    if (this.insertAfter !== false) {
-        this.mobySelector.append('<div class="moby-after">' + this.insertAfter + '</div>');
-    }
+    this.mobySelector.find('.moby-clone *[id]').removeAttr('id');
+    this.mobySelector.find('.moby-clone li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
 };
 
 

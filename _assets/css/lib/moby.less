@@ -98,6 +98,103 @@
     &.moby-hidden {
         visibility: hidden;
     }
+    &.moby-demo {
+        color: @moby-background;
+        background: @moby-blue;
+        position: fixed;
+        z-index: 3000;
+        top: 0;
+        height: 100%;
+        width: 30%;
+        min-width: @moby-width;
+        .moby-flex-container(row, wrap);
+        .align-items(center);
+        & > * {
+            width: 100%;
+        }
+
+        .moby-transform(~"translateX(100%)");
+        &.moby-active {
+            .moby-transform(~"translateX(0)");
+        }
+        & nav {
+            //margin-top: -120px;
+        }
+        & ul {
+            & li {
+                & ul {
+                    & a {
+                        padding: 20px 90px 20px 90px;
+                    }
+                }
+                & a {
+                    position: relative;
+                    color: @moby-background;
+                    text-decoration: none;
+                    font-size: 20px;
+                    font-weight: 400;
+                    display: block;
+                    padding: 20px 90px 20px 90px;
+                    text-align: center;
+                    & .moby-expand {
+                        position: absolute;
+                        height: 100%;
+                        width: 60px;
+                        top: 0;
+                        right: 0;
+                        height: 100%;
+                        text-align: center;
+                        padding: 10px;
+                        color: @moby-blue;
+                        .moby-flex-container();
+                        .moby-align-items(center);
+                        .moby-justify-content(center);
+                        & i,
+                        & span {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        & .moby-close {
+            align-self: flex-start;
+            color: @moby-background;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 400;
+            padding: 30px;
+            background: transparent;
+            display: inline-block;
+            & .moby-close-icon {
+                margin-right: 0;
+                height: 20px;
+                width: 20px;
+                display: inline-block;
+                &::before,
+                &::after {
+                    background: @moby-background;
+                }
+            }
+        }
+        & .moby-before {
+            padding: 0 30px;
+            & img {
+                display: block;
+                margin: 0 auto;
+                max-width: 100px;
+            }
+        }
+        & .moby-after {
+            align-self: flex-end;
+            & p {
+                padding: 30px;
+                text-align: center;
+                font-size: 13px;
+            }
+        }
+    }
     &.right-side {
         position: fixed;
         z-index: 3000;
