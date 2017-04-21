@@ -33,12 +33,10 @@ var Moby = function(options) {
     this.menuClass          = (typeof(options.menuClass) == 'undefined' ? 'right-side' : options.menuClass);
     this.subMenuOpenIcon    = (typeof(options.subMenuOpenIcon) == 'undefined' ? '<span>&#x25BC;</span>' : options.subMenuOpenIcon);
     this.subMenuCloseIcon   = (typeof(options.subMenuCloseIcon) == 'undefined' ? '<span>&#x25B2;</span>' : options.subMenuCloseIcon);
-    this.closeButton        = (typeof(options.closeButton) == 'undefined' ? true : options.closeButton);
-    this.closeButtonContent = (typeof(options.closeButtonContent) == 'undefined' ? '<span class="moby-close-icon"></span> Close Menu' : options.closeButtonContent);
     this.breakpoint         = (typeof(options.breakpoint) == 'undefined' ? 1024 : options.breakpoint);
     this.enableEscape       = (typeof(options.enableEscape) == 'undefined' ? true : options.enableEscape);
     this.overlayClass       = (typeof(options.overlayClass) == 'undefined' ? 'dark' : options.overlayClass);
-    this.template           = (typeof(options.template) == 'undefined' ? '<div class="moby-clone"></div>' : options.template);
+    this.template           = (typeof(options.template) == 'undefined' ? false : options.template);
 
     // add the overlay to the beginning of the body
     if (this.overlay === true) {
@@ -53,10 +51,7 @@ var Moby = function(options) {
     this.mobySelector = $('body').find('#moby' + Moby.instances);
     this.cloneMenu();
 
-    // If the closeButton is desired (or left undefined) add the close button to #moby
-    if (this.closeButton === true) {
-        this.mobySelector.prepend('<div class="moby-close">' + this.closeButtonContent + '</div>');
-    }
+    // assign close function
     this.mobySelector.on('click', '.moby-close', this.closeMoby.bind(this));
 
     // if the escapeLey functinality is desired (or left undefined), assign close function to the escape key
@@ -126,16 +121,28 @@ Moby.prototype.closeMoby = function() {
  */
 Moby.prototype.cloneMenu = function() {
 
-    this.mobySelector.append(this.template);
+    var mobyMarkup = '';
 
-    if (this.mobySelector.find('.moby-clone').length < 1) {
-        this.mobySelector.append('<div class="moby-clone"></div>');
+    if (this.template === false) {
+        mobyMarkup  = '<div class="moby-wrap">';
+        mobyMarkup +=     '<div class="moby-close"><span class="moby-close-icon"></span> Close Menu</div>';
+        mobyMarkup +=     '<div class="moby-menu"></div>';
+        mobyMarkup += '</div>';
+    } else {
+        mobyMarkup = this.template;
     }
 
-    this.menu.clone().appendTo(this.mobySelector.find('.moby-clone'));
+    this.mobySelector.append(mobyMarkup);
 
-    this.mobySelector.find('.moby-clone *[id]').removeAttr('id');
-    this.mobySelector.find('.moby-clone li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
+    if (this.mobySelector.find('.moby-menu').length < 1) {
+        console.log('You must have a moby-menu class in your template!');
+        return false;
+    }
+
+    this.menu.clone().appendTo(this.mobySelector.find('.moby-menu'));
+
+    this.mobySelector.find('.moby-menu *[id]').removeAttr('id');
+    this.mobySelector.find('.moby-menu li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
 };
 
 
@@ -173,11 +180,11 @@ Moby.prototype.breakpointResize = function() {
 
     var w = window.outerWidth;
 
-    if (this.breakPoint === false) {
+    if (this.breakpoint === false) {
         return false;
     } else {
 
-        if (w >= this.breakPoint && this.mobySelector.hasClass('moby-active')) {
+        if (w >= this.breakpoint && this.mobySelector.hasClass('moby-active')) {
             this.closeMoby();
         }
     }
