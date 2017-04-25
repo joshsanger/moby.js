@@ -88,7 +88,6 @@ var Moby = function(options) {
  * 02. CLASS VARIABLES
  * Variables that will be used throughout the class
  */
-
 Moby.instances       = 0;
 Moby.slideTransition = 200;
 
@@ -97,7 +96,6 @@ Moby.slideTransition = 200;
  * 03. CLOSE MOBY
  * Closes the Moby menu
  */
-
 Moby.prototype.closeMoby = function() {
 
     var mobyActive = $('body').find('.moby.moby-active');
