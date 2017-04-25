@@ -11,7 +11,7 @@
     "moby"
   ],
   "license": "MIT",
-		  "homepage": "http://joshuasanger.ca/libraries/moby",
+  "homepage": "http://joshuasanger.ca/libraries/moby",
   "dependencies": {
     "jquery": "^2.2.2"
   }
