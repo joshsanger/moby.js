@@ -134,7 +134,7 @@
             font-weight: 400;
             padding: 20px;
             .moby-flex-container();
-            .align-items(center);
+            .moby-align-items(center);
             background: transparent;
             position: absolute;
             top: 0;
@@ -154,7 +154,7 @@
         & .moby-wrap {
             height: ~"calc(100% - 40px)";
             .moby-flex-container(row, wrap);
-            .align-items(center);
+            .moby-align-items(center);
             .moby-justify-content(center);
             & > div {
                 width: 100%;
@@ -192,7 +192,7 @@
                     display: block;
                     padding: 20px 70px 20px 70px;
                     text-align: center;
-                    .trans(color, 0.3s);
+                    .moby-transition(color, 0.3s);
                     &:hover {
                         color: #e0e0e0;
                     }
@@ -209,7 +209,7 @@
                         .moby-flex-container();
                         .moby-align-items(center);
                         .moby-justify-content(center);
-                        .trans(color, 0.3s);
+                        .moby-transition(color, 0.3s);
                         &:hover {
                             color: #e0e0e0;
                         }
