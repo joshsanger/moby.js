@@ -135,7 +135,7 @@ Moby.prototype.cloneMenu = function() {
     this.mobySelector.append(mobyMarkup);
 
     if (this.mobySelector.find('.moby-menu').length < 1) {
-        console.log('You must have a moby-menu class in your template!');
+        console.error('You must have a moby-menu class in your template!');
         return false;
     }
 
