@@ -10,6 +10,7 @@ module.exports = function(grunt) {
             },
             build: {
                 src: [
+                    'dist/moby.js',
                     '_assets/js/lib/*.js',
                     '_assets/js/src/*.js'
                 ],
@@ -19,6 +20,7 @@ module.exports = function(grunt) {
         concat : {
             basic : {
                 src : [
+                    'dist/moby.less',
                     '_assets/css/lib/*.less',
                     '_assets/css/src/mixins.less',
                     '_assets/css/src/reset.less',
