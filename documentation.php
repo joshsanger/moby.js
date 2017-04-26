@@ -108,7 +108,7 @@ var mobyMenu = new Moby({
 <pre>
 <code class="language-markup">
 &lt;div class="moby-wrap"&gt;
-    &lt;div class="moby-close"&gt;
+    &lt;div class="moby-close"&gt; &lt;!-- Reserved class for closing moby --&gt;
         &lt;span class="moby-close-icon"&gt;&lt;/span> Close Menu
     &lt;/div&gt;
     &lt;div class="moby-menu"&gt;&lt;/div&gt; &lt;!-- Must be included --&gt;
