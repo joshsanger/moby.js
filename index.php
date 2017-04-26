@@ -24,11 +24,14 @@
 					<h1>Getting started</h1>
 					<h2>1. Adding the files to your project</h2>
 					<div class="wrap">
-						<p>Link boring CSS file in <code class="language-markup">&lt;head&gt;</code> (If you are using LESS, high-five! Skip this)</p>
-						<pre><code class="language-markup">&lt;link type="text/css" rel="stylesheet" href="./path-to-css/moby.css"/&gt;</code></pre>
+						<p>You can include Moby.js in your project by using <a href="https://bower.io/" target="_blank">Bower</a> install.</p>
+<pre>
+<code class="language-markup">
+bower install moby.js</code>
+</pre>
 					</div> <!-- /wrap -->
 					<div class="wrap">
-						<p>If you are using LESS, simply import the file</p>
+						<p>Point to which ever files you prefer (less, css, minified versions, etc.)</p>
 <pre>
 <code class="language-css">
 /* Include in your main less file */
@@ -36,7 +39,7 @@
 </pre>
 					</div> <!-- /wrap -->
 					<div class="wrap">
-						<p>PRO TIP: Font-Awesome works as a great asset when using Moby.js. <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Download Font-Awesome</a></p>
+						<p>PRO TIP: Google's Material Icons work as a great asset when using Moby.js. <a href="http://material.io/icons//" target="_blank">Download Google's Material Icons</a></p>
 						<pre><code class="language-markup">&lt;link type="text/css" rel="stylesheet" href="./path-to-font-awesome/css/font-awesome.min.css"/&gt;</code></pre>
 					</div> <!-- /wrap -->
 					<div class="wrap">
@@ -70,7 +73,7 @@
 
 &lt;!-- Do NOT use an anchor tag for the mobile menu button --&gt;
 &lt;span id="moby-button"&gt;
-	&lt;i class="fa fa-bars"&gt;&lt;/i&gt;
+	&lt;i class="material-icons"&gt;menu&lt;/i&gt;
 &lt;/span&gt;</code>
 </pre>
 					</div> <!-- /wrap -->
