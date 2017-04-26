@@ -34,7 +34,6 @@ var mobyMenu = new Moby({
     onOpen           : false,
 	overlay			 : true,
 	overlayClass 	 : 'dark',
-    overlayClass 	 : 'dark',
     subMenuOpenIcon  : '&lt;span&gt;&amp;#x25BC;&lt;/span&gt;',
 	subMenuCloseIcon : '&lt;span&gt;&amp;#x25B2;&lt;/span&gt;',
     template         : '&lt;div class="moby-wrap"&gt;&lt;div class="moby-close"&gt;&lt;span class="moby-close-icon"&gt;&lt;/span> Close Menu&lt;/div&gt;&lt;div class="moby-menu"&gt;&lt;/div&gt;&lt;/div&gt;'
