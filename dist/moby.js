@@ -24,15 +24,20 @@ var Moby = function(options) {
     Moby.instances++;
 
     // Set defaults
-    this.menu               = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.menu);
-    this.mobyTrigger        = (typeof(options.mobyTrigger) == 'undefined' ? $('#moby-button') : options.mobyTrigger);
-    this.overlay            = (typeof(options.overlay) == 'undefined' ? true : options.overlay);
-    this.menuClass          = (typeof(options.menuClass) == 'undefined' ? 'right-side' : options.menuClass);
-    this.subMenuOpenIcon    = (typeof(options.subMenuOpenIcon) == 'undefined' ? '<span>&#x25BC;</span>' : options.subMenuOpenIcon);
-    this.subMenuCloseIcon   = (typeof(options.subMenuCloseIcon) == 'undefined' ? '<span>&#x25B2;</span>' : options.subMenuCloseIcon);
+
+
+
     this.breakpoint         = (typeof(options.breakpoint) == 'undefined' ? 1024 : options.breakpoint);
     this.enableEscape       = (typeof(options.enableEscape) == 'undefined' ? true : options.enableEscape);
+    this.menu               = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.menu);
+    this.menuClass          = (typeof(options.menuClass) == 'undefined' ? 'right-side' : options.menuClass);
+    this.mobyTrigger        = (typeof(options.mobyTrigger) == 'undefined' ? $('#moby-button') : options.mobyTrigger);
+    this.onClose            = (typeof(options.onClose) == 'undefined' ? false : options.onClose);;
+    this.onOpen             = (typeof(options.onOpen) == 'undefined' ? false : options.onOpen);;
+    this.overlay            = (typeof(options.overlay) == 'undefined' ? true : options.overlay);
     this.overlayClass       = (typeof(options.overlayClass) == 'undefined' ? 'dark' : options.overlayClass);
+    this.subMenuOpenIcon    = (typeof(options.subMenuOpenIcon) == 'undefined' ? '<span>&#x25BC;</span>' : options.subMenuOpenIcon);
+    this.subMenuCloseIcon   = (typeof(options.subMenuCloseIcon) == 'undefined' ? '<span>&#x25B2;</span>' : options.subMenuCloseIcon);
     this.template           = (typeof(options.template) == 'undefined' ? false : options.template);
 
     // add the overlay to the beginning of the body
@@ -104,6 +109,10 @@ Moby.prototype.closeMoby = function() {
         }
         mobyActive.removeClass('moby-active');
         $('body').removeClass('moby-body-fixed');
+
+        if (this.onClose !== false) {
+            this.onClose();
+        }
     }
 };
 
@@ -159,6 +168,10 @@ Moby.prototype.openMoby = function() {
     // Show the overlay
     if (this.overlay === true) {
         this.overlaySelector.addClass('moby-overlay-active');
+    }
+
+    if (this.onOpen !== false) {
+        this.onOpen();
     }
 };
 
