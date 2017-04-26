@@ -12,8 +12,6 @@
  * 06. BREAKPOINT RESIZE
  * 07. MOBY EXPAND SUB MENU
  * 06. MOBY PREVENT DUMMY LINKS
- * 07. POLY FILL FOR CUSTOM EVENTS
- * 08. CUSTOM EVENT SET UP
  */
 
 
@@ -24,7 +22,6 @@
 var Moby = function(options) {
 
     Moby.instances++;
-    var mobyMenu = this;
 
     // Set defaults
     this.menu               = (typeof(options.menu) == 'undefined' ? $('#main-nav') : options.menu);
@@ -108,8 +105,6 @@ Moby.prototype.closeMoby = function() {
         mobyActive.removeClass('moby-active');
         $('body').removeClass('moby-body-fixed');
     }
-
-    this.mobySelector.trigger('mobyClosed');
 };
 
 
@@ -165,8 +160,6 @@ Moby.prototype.openMoby = function() {
     if (this.overlay === true) {
         this.overlaySelector.addClass('moby-overlay-active');
     }
-
-    this.mobySelector.trigger('mobyOpened');
 };
 
 
@@ -226,44 +219,3 @@ Moby.prototype.mobyPreventDummyLinks = function(e) {
         }
     }
 };
-
-
-/**
- * 07. POLY FILL FOR CUSTOM EVENTS
- * Poly fill for custom events for IE
- */
-(function () {
-
-    function CustomEvent (event, params) {
-        params = params || { bubbles: false, cancelable: false, detail: undefined };
-        var evt = document.createEvent( 'CustomEvent' );
-        evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-        return evt;
-    }
-
-    CustomEvent.prototype = window.Event.prototype;
-
-    window.CustomEvent = CustomEvent;
-})();
-
-
-/**
- * 08. CUSTOM EVENT SET UP
- * Sets up the moby menu, settings, and methods
- */
-$(document).ready(function(){
-
-    Moby.mobyEvents = {};
-    Moby.mobyEvents.mobyOpened = new CustomEvent("mobyOpened",
-        {
-            bubbles: true,
-            cancelable: true
-        }
-    );
-    Moby.mobyEvents.mobyClosed = new CustomEvent("mobyClosed",
-        {
-            bubbles: true,
-            cancelable: true
-        }
-    );
-});
