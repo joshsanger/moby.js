@@ -40,7 +40,7 @@
 					<li><a href="<?php echo BASE_URL;?>/dist/moby2.0.4.zip">Download</a></li>
 				</ul>
 			</nav>
-			<span id="trigger-main-menu" class="trigger-menu main-trigger" data-target="right-side">
+			<span id="trigger-main-menu" class="demo-trigger">
 				<i class="material-icons">&#xE5D2;</i>
 			</span>
 		</div> <!-- /container -->
