@@ -1,5 +1,5 @@
 /* 
- * MOBY.LESS VERSION 2.0.4
+ * MOBY.LESS VERSION 2.0.6
  */
 
 @moby-background: #ffffff;
@@ -94,7 +94,7 @@
     }
     background: @moby-background;
     .moby-transition(~"all 0.4s");
-    right: 0;
+    overflow: auto;
     &.moby-hidden {
         display: none;
     }
@@ -226,6 +226,7 @@
         top: 0;
         height: 100%;
         width: 30%;
+        right: 0;
         min-width: @moby-width;
         .moby-transform(~"translateX(100%)");
         &.moby-active {

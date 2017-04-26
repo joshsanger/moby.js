@@ -1,5 +1,5 @@
 /* 
- * MOBY.LESS VERSION 2.0.4
+ * MOBY.LESS VERSION 2.0.6
  */
 .moby-overlay {
   -webkit-box-sizing: border-box;
@@ -46,7 +46,7 @@
   -o-transition: all 0.4s;
   -ms-transition: all 0.4s;
   transition: all 0.4s;
-  right: 0;
+  overflow: auto;
 }
 .moby * {
   -webkit-box-sizing: border-box;
@@ -226,6 +226,7 @@
   top: 0;
   height: 100%;
   width: 30%;
+  right: 0;
   min-width: 280px;
   -webkit-transform: translateX(100%);
   -moz-transform: translateX(100%);
