@@ -36,7 +36,7 @@
 					</li>
 					<li><a href="<?php echo BASE_URL;?>/examples.php" class="<?php if($active == 'examples'){ echo 'active'; }?>">Examples</a></li>
 					<li><a href="<?php echo BASE_URL;?>/documentation.php" class="<?php if($active == 'documentation'){ echo 'active'; }?>">Documentation</a></li>
-					<li><a href="<?php echo BASE_URL;?>/dist/moby2.0.5.zip">Download</a></li>
+					<li><a href="<?php echo BASE_URL;?>/downloads/moby2.0.5.zip">Download</a></li>
 				</ul>
 			</nav>
 			<span id="trigger-main-menu" class="demo-trigger">
