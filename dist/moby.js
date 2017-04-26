@@ -145,6 +145,7 @@ Moby.prototype.cloneMenu = function() {
 
     this.mobySelector.find('.moby-menu *[id]').removeAttr('id');
     this.mobySelector.find('.moby-menu li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
+    this.mobySelector.removeClass('moby-hidden');
 };
 
 
@@ -153,11 +154,6 @@ Moby.prototype.cloneMenu = function() {
  * Opens the Moby menu
  */
 Moby.prototype.openMoby = function() {
-
-    // remove the moby-hidden class if it exists
-    if (this.mobySelector.hasClass('moby-hidden')) {
-        this.mobySelector.removeClass('moby-hidden');
-    }
 
     // moby-active should be used to initiate the animation in your css file
     this.mobySelector.addClass('moby-active');
