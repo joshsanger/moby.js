@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<title><?php echo $title; ?>Moby.js - Helping Create Mobile Menus</title>
-
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo BASE_URL; ?>/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/favicons/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/favicons/favicon-16x16.png" sizes="16x16">
@@ -37,7 +36,7 @@
 					</li>
 					<li><a href="<?php echo BASE_URL;?>/examples.php" class="<?php if($active == 'examples'){ echo 'active'; }?>">Examples</a></li>
 					<li><a href="<?php echo BASE_URL;?>/documentation.php" class="<?php if($active == 'documentation'){ echo 'active'; }?>">Documentation</a></li>
-					<li><a href="<?php echo BASE_URL;?>/dist/moby2.0.4.zip">Download</a></li>
+					<li><a href="<?php echo BASE_URL;?>/dist/moby2.0.5.zip">Download</a></li>
 				</ul>
 			</nav>
 			<span id="trigger-main-menu" class="demo-trigger">

@@ -2,7 +2,7 @@
  * T A B L E   O F   C O N T E N T S
  *
  * @author      Josh Sanger
- * @version     2.0.0
+ * @version     2.0.4
  *
  * 01. INIT MOBY
  * 02. CLASS VARIABLES

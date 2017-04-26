@@ -8,7 +8,7 @@
 		<div class="container">
 			<h2>Wave goodbye to annoying Mobile Menus</h2>
 			<p>Moby.js is a JS Library that assists in creating mobile menus</p>
-            <a href="<?php echo BASE_URL;?>/downloads/moby2.0.4.zip">Download 2.0.4</a>
+            <a href="<?php echo BASE_URL;?>/downloads/moby2.0.5.zip">Download 2.0.5</a>
 		</div> <!-- /container -->
 	</section> <!-- / top-section -->
 	<article class="content">
@@ -24,7 +24,7 @@
 					<h1>Getting started</h1>
 					<h2>1. Adding the files to your project</h2>
 					<div class="wrap">
-						<p>You can <a href="<?php echo BASE_URL;?>/downloads/moby2.0.4.zip">download</a> the files, or simply include Moby.js in your project by using <a href="https://bower.io/" target="_blank">Bower</a> install.</p>
+						<p>You can <a href="<?php echo BASE_URL;?>/downloads/moby2.0.5.zip">download</a> the files, or simply include Moby.js in your project by using <a href="https://bower.io/" target="_blank">Bower</a> install.</p>
 <pre>
 <code class="language-markup">
 bower install moby.js</code>
