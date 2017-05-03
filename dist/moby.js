@@ -123,7 +123,8 @@ Moby.prototype.closeMoby = function() {
  */
 Moby.prototype.cloneMenu = function() {
 
-    var mobyMarkup = '';
+    var mobyMarkup  = '';
+    var submenuIcon = this.subMenuOpenIcon;
 
     if (this.template === false) {
         mobyMarkup  = '<div class="moby-wrap">';
@@ -144,7 +145,14 @@ Moby.prototype.cloneMenu = function() {
     this.menu.clone().appendTo(this.mobySelector.find('.moby-menu'));
 
     this.mobySelector.find('.moby-menu *[id]').removeAttr('id');
-    this.mobySelector.find('.moby-menu li ul').parents('li').first().find('> a').append("<span class='moby-expand'>" + this.subMenuOpenIcon + '</span>');
+
+    this.mobySelector.find('.moby-menu li').each(function() {
+
+        if ($(this).find('ul').length > 0) {
+            $(this).find('> a').append("<span class='moby-expand'>" + submenuIcon + '</span>');
+        }
+    });
+
     this.mobySelector.removeClass('moby-hidden');
 };
 
