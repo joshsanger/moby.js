@@ -1,4 +1,4 @@
->ES6 Version coming soon; stay tuned ...
+> ES6 Version coming soon. Stay tuned and happy coding!
 
 # moby.js
 Moby.js is a jQuery Library that assists in creating mobile menus. [View demo and docs](http://www.joshuasanger.ca/libraries/moby)
